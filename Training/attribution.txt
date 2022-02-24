@@ -1,0 +1,16 @@
+Passages used for tranining and validation are taken from public domain eBooks provided by Project Guttenberg.  In no particular this includes the following works:
+
+The Adventures of Gil Blas of Santillane, Volume I (of 3), by Alain René Le Sage
+https://www.gutenberg.org/cache/epub/66677/pg66677.txt
+
+Comic History of the United States, by Bill Nye
+https://www.gutenberg.org/cache/epub/21427/pg21427.txt
+
+On the Origin of Species, by Charles Darwin
+https://www.gutenberg.org/cache/epub/1228/pg1228.txt
+
+The Poetical Works of John Milton, by John Milton
+https://www.gutenberg.org/cache/epub/1745/pg1745.txt
+
+Harvard Classics Volume 28, by Various
+https://www.gutenberg.org/cache/epub/21962/pg21962.txt
