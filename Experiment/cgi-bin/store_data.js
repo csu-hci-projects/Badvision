@@ -2,8 +2,7 @@
 
 console.log("Access-Control-Allow-Origin:*");
 console.log("Access-Control-Allow-Headers:*");
-console.log();
-console.log();
+console.log("\n\n");
 console.log("Hello world!");
 console.log("This is node.js!");
 
@@ -16,5 +15,4 @@ console.log(process.env)
 process.env.forEach((val) => {
     console.log(`${val}`)
 })
-console.log()
-console.log()
+console.log("\n\n");
