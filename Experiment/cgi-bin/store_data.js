@@ -4,6 +4,7 @@ let postData = "";
 
 console.log("Access-Control-Allow-Origin:*");
 console.log("Access-Control-Allow-Headers:*");
+console.log("Content-Type: text/plain");
 console.log("\n\n");
 console.log("Hello world!");
 console.log("This is node.js!");

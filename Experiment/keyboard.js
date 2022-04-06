@@ -34,7 +34,7 @@ function storeResponse(data) {
     fetch("//www.cs.colostate.edu/~bdvision/cgi-bin/store_data.js", {
             method: "post",
             headers: {
-                "Content-Type": "application/json"
+                // "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         })
