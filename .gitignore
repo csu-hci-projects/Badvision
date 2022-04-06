@@ -1,1 +1,8 @@
-MarkovGenerator/__pycache__/generator.cpython-38.pyc
+MarkovGenerator/__pycache__/*
+Docs/proposal-tvgc.fdb_latexmk
+Docs/*.log
+Docs/*.gz
+Docs/*.lyx~
+Docs/*.out
+Docs/*.lyx
+Docs/*.fls
