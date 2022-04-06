@@ -30,11 +30,9 @@ process.argv.forEach((val, index) => {
     println(`${index}: ${val}`)
 })
 
-println(process.env)
-
-process.env.forEach((val) => {
-    println(`${val}`)
-})
+for (const v in process.env) {
+    println(`${v} ${process.env[v]}`)
+}
 
 println(`Post data: ${postData}`);
 
