@@ -1,0 +1,110 @@
+body {
+    background: black;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.keyboard .row {
+    display: flex;
+    flex-direction: row;
+}
+
+.keyboard.rectangular .key.hint {
+    box-shadow: inset 0 0 5px #fff, /* inner white */
+    inset 2px 0 8px #f0f, /* inner left magenta short */
+    inset -2px 0 8px #0ff, /* inner right cyan short */
+    inset 2px 0 30px #f0f, /* inner left magenta broad */
+    inset -2px 0 30px #0ff, /* inner right cyan broad */
+    0 0 5px #fff, /* outer white */
+    -1px 0 8px #f0f, /* outer left magenta */
+    1px 0 8px #0ff/* outer right cyan */
+}
+
+.keyboard.hexagonal {
+    margin-top: 20px;
+}
+
+.keyboard.hexagonal .key.hint {
+    box-shadow: inset 0 0 5px #fff, /* inner white */
+    inset 4px 0 16px #f0f, /* inner left magenta short */
+    inset -4px 0 16px #0ff, /* inner right cyan short */
+    inset 4px 0 40px #f0f, /* inner left magenta broad */
+    inset -4px 0 40px #0ff, /* inner right cyan broad */
+    0 0 10px #fff, /* outer white */
+    -2px 0 16px #f0f, /* outer left magenta */
+    2px 0 16px #0ff/* outer right cyan */
+}
+
+.keyboard .key,
+.keyboard .spacer {
+    padding-top: 20px;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.key[data-key=' '] {
+    font-size: 40px;
+    line-height: 70px;
+}
+
+.keyboard.rectangular .key[data-key=' '] {
+    width: 320px;
+}
+
+.keyboard.rectangular .row:nth-child(even) {
+    padding-left: 45px;
+}
+
+.keyboard.rectangular .key,
+.keyboard.rectangular .spacer {
+    padding-top: 10px;
+    width: 70px;
+    height: 70px;
+    margin: 8px;
+}
+
+.keyboard .key {
+    background-color: #e0e0ff;
+}
+
+.keyboard.hexagonal .row:nth-child(even) {
+    padding-left: 50px;
+}
+
+.keyboard.hexagonal .row {
+    margin-top: -20px;
+}
+
+.keyboard.hexagonal .key,
+.keyboard.hexagonal .spacer {
+    width: 90px;
+    height: 90px;
+    margin: 5px;
+}
+
+.keyboard.hexagonal .key {
+    -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+
+.key:active {
+    -webkit-text-stroke: 2px #88f;
+    text-shadow: 0px -2px 8px #00f;
+    color: #dde;
+    background: radial-gradient(#ddf, #004);
+}
+
+
+/*
+--------------------------------------------------------
+*/
+
+#entry {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+}
