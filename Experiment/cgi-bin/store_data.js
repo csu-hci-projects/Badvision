@@ -1,26 +1,42 @@
 #!/bin/env /bin/node
 
 let postData = "";
-
-console.log("Access-Control-Allow-Origin:*");
-console.log("Access-Control-Allow-Headers:*");
-console.log("Content-Type: text/plain");
-console.log("\n\n");
-console.log("Hello world!");
-console.log("This is node.js!");
+let response = "";
 
 process.stdin.on('data', function(data) { postData += data; });
 
+function print(data) {
+    response += data;
+}
+
+function println(data) {
+    response += data + "\n";
+}
+
+function sendResponse() {
+    console.log("Access-Control-Allow-Origin:*");
+    console.log("Access-Control-Allow-Headers:*");
+    console.log("Content-Type: text/plain");
+    console.log("Transfer-Encoding: chunked");
+    console.log("\n");
+    console.log(response.length + "\r\n");
+    console.log(response + "\r\n");
+}
+
+println("Hello world!");
+println("This is node.js!");
+
 process.argv.forEach((val, index) => {
-    console.log(`${index}: ${val}`)
+    println(`${index}: ${val}`)
 })
 
-console.log(process.env)
+println(process.env)
 
 process.env.forEach((val) => {
-    console.log(`${val}`)
+    println(`${val}`)
 })
 
-console.log(`Post data: ${postData}`);
+println(`Post data: ${postData}`);
 
-console.log("\r\n");
+
+sendResponse();
