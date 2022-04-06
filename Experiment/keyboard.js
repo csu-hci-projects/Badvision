@@ -30,6 +30,18 @@ const layouts = {
     }
 }
 
+function storeResponse(data) {
+    fetch("//www.cs.colostate.edu/~bdvision/cgi-bin/store_data.js", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response) => response.json())
+        .then(console.log)
+}
+
 function adjustHints(letters) {
     for (const key of document.getElementsByClassName("key")) {
         const letter = key.getAttribute("data-key");
