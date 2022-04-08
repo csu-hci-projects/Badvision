@@ -56,6 +56,9 @@ function adjustHints(letters) {
 
 function keyPressed(key) {
     document.getElementById("entry").innerHTML += key;
+    if (navigator && navigator.vibrate) {
+        navigator.vibrate(50);
+    }
 }
 
 function buildKeyboard(layout) {
