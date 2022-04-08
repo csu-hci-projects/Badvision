@@ -3,8 +3,122 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="greeting">
+      <h2>Badvision Keyboard Experiment</h2>
+      <p>Hello and thank you for participating in the Badvision keyboard experiment!</p>      
+      <p>The goal of this experiment is to compare how well you type using different types of keyboards and also to test out a protype typing hint system.</p>
+      <p class='warning'>Please note this requires a touchscreen device and will not work with a mouse!</p>
+      <p>There are a total of 4 different trials, but the whole experiment should not take more than 15 minutes in total.</p>
+      <p>None of the data collected will be published or shared with any parties, this is only for a graded class project.</p>
+      <hr>
+      <p>Before we get started, please fill out the following form and press the Submit button</p>
+      <form>
+      <table class="survey">
+        <tr>
+          <td>How old are you?</td>
+          <td><select name="age">
+            <option value="0">Under 10</option>
+            <option value="1">10-14</option>
+            <option value="2">15-19</option>
+            <option value="3">20-24</option>
+            <option value="4">25-29</option>
+            <option value="5">30-34</option>
+            <option value="6">35-39</option>
+            <option value="7">40-44</option>
+            <option value="8">45-49</option>
+            <option value="9">50-54</option>
+            <option value="10">55-59</option>
+            <option value="11">60-64</option>
+            <option value="12">65-69</option>
+            <option value="13">70-74</option>
+            <option value="14">75 or older</option>
+            </select>
+        </td></tr>
+        <tr>
+          <td>What device are you using?</td>
+          <td><select name="device">
+            <option value="surface">Microsoft Surface</option>
+            <option value="ipad">Apple iPad</option>
+            <option value="droid">Android tablet (Samsung, etc)</option>
+            <option value="other">Other (please specify)</option>
+            </select>
+            <input name="device-other" placeholder="If other please specify">
+          </td>
+        </tr>
+        <tr>
+          <td>Where is the device?</td>
+          <td><select name="position">
+          <option value="lap">In my lap</option>
+          <option value="table">On a tray/table in front of me</option>
+          <option value="hand">Holding it with my non-dominant hand</option>
+          <option value="side">Next to me (such as on the arm of a couch)</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td>Do you have any impairments that affect your typing on regular basis?</td>
+          <td>
+            <select name="impairment">
+              <option value="none">None</option>
+              <option value="fatigue">Chronic fatigue</option>
+              <option value="injury">Past/present injuries</option>
+              <option value="dyslexia">Dyslexia (reading)</option>
+              <option value="dysgraphia">Dysgraphia (writing)</option>
+              <option value="vision">Vision impairment</option>
+              <option value="vertigo">Vertigo/balance</option>
+              <option value="cp">Cerebal Palsy</option>              
+              <option value="other">Other (please specify)</option>
+            </select>
+            <input name="impairment-other" placeholder="If other please specify">
+            <br/>
+            <i>(select the most prevailing impairment if more than one)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>If so, how much do you feel this impairment affects your typing?</td>
+          <td>
+            <table class="scale">
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="ifreq" value="1"></td>
+                <td><input type="radio" name="ifreq" value="2"></td>
+                <td><input type="radio" name="ifreq" value="3"></td>
+                <td><input type="radio" name="ifreq" value="4"></td>
+                <td><input type="radio" name="ifreq" value="5"></td>
+                <td><input type="radio" name="ifreq" value="6"></td>
+                <td><input type="radio" name="ifreq" value="7"></td>
+              </tr>
+              <tr>
+                <td colspan="1">Very<br>little</td>
+                <td colspan="4" class="center">Somewhat</td>
+                <td colspan="2" class="right">A lot</td>
+              </tr>
+            </table>
+        </td></tr>
+        <tr>
+          <td colspan="2">
+            Thank you for filling out this form! Press the submit button when you are ready to proceed.
+            <br/>
+            <div class="center">
+              <input type="button" value="Submit" onclick="finishGreeting()">
+            </div>
+          </td>
+        </tr>
+      </table>
+      </form>
+
+    </div>
     <div id="prompt"></div>
     <div id="entry"></div>
     <div id="keyboard"></div>
-    <script src="keyboard.js"></script>
+    <script src="phrases.js"></script>
+    <script src="markov.js"></script>
+    <script src="keyboard.js"></script>    
 </body>

@@ -103,8 +103,62 @@ body {
 --------------------------------------------------------
 */
 
+#prompt {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    background-color: #004;
+    color: #fed;
+    padding: 15px;
+}
+
 #entry {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 36px;
+}
+
+#greeting {
+    background-color: #444;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+#greeting,
+#greeting td {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#greeting table.survey>tbody>tr>td:nth-child(1) {
+    width: 33%
+}
+
+#greeting table.survey>tbody>tr:nth-child(odd) {
+    background-color: #333;
+}
+
+#greeting table.survey>tbody>tr>td {
+    padding: 10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.scale tr:nth-child(1) td {
+    padding-left: 7px;
+}
+
+.scale td {
+    width: 50px;
+}
+
+.scale .center {
+    padding-left: 20px;
+}
+
+.scale .right {
+    padding-left: 40px;
 }
