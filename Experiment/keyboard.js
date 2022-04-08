@@ -1,3 +1,5 @@
+const click = new Audio("click.wav");
+
 // pipe is treated as a spacer (not a visible key)
 const layouts = {
     qwerty: {
@@ -56,6 +58,7 @@ function adjustHints(letters) {
 
 function keyPressed(key) {
     document.getElementById("entry").innerHTML += key;
+    click.play();
     if (navigator && navigator.vibrate) {
         navigator.vibrate(50);
     }
