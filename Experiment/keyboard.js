@@ -1,12 +1,6 @@
 const click = new Audio("click.wav");
 const debugMode = true;
 
-var promptPromise;
-var promptPromiseResolve;
-var promptExpectedValue;
-var promptEntryValue;
-var promptHintsEnabled;
-
 // pipe is treated as a spacer (not a visible key)
 const layouts = {
     qwerty: {
@@ -38,6 +32,38 @@ const layouts = {
         ]
     }
 }
+
+var promptPromise;
+var promptPromiseResolve;
+var promptExpectedValue;
+var promptEntryValue;
+var promptHintsEnabled;
+var trials = [];
+const trialVariables = [{
+        instructions: "In this trial you will see a standard keyboard.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
+        layout: layouts.qwerty,
+        showHints: false,
+        phrases: []
+    },
+    {
+        instructions: "In this trial you will see an experimental keyboard.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
+        layout: layouts.metropolis,
+        showHints: false,
+        phrases: []
+    },
+    {
+        instructions: "In this trial you will see a standard keyboard and typing hints.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
+        layout: layouts.qwerty,
+        showHints: true,
+        phrases: []
+    },
+    {
+        instructions: "In this trial you will see the experimental keyboard and typing hints.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
+        layout: layouts.metropolis,
+        showHints: true,
+        phrases: []
+    },
+];
 
 // Not sure if the server is 100% reliable so let's add a retry loop to be safe!
 // From: https://dev.to/ycmjason/javascript-fetch-retry-upon-failure-3p6g
@@ -72,9 +98,9 @@ function adjustHints(letters) {
 }
 
 function findHints(source) {
-    if (!source) {
-        return "";
-    }
+    // if (!source) {
+    //     return "";
+    // }
     let current = markov;
     for (let i = 0; i < source.length; i++) {
         current = current[source.substring(0, i + 1)];
@@ -127,7 +153,6 @@ function keyPressed(key) {
         }
         const hintSource = promptEntryValue.substring(startIndex);
         adjustHints(promptExpectedValue[0] + findHints(hintSource));
-
     } else {
         adjustHints("");
     }
@@ -173,49 +198,75 @@ function showGreeting() {
     document.getElementById("greeting").style.display = "block";
 }
 
-function getTrialVariables(number) {
-    return {
-        instructions: "In this trial you will see the experimental keyboard and hints.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
-        layout: layouts.metropolis,
-        showHints: true
-    };
+// Seed is returned by server after initial form submit
+// This is so that we can follow a latin-squares assignment
+async function startTrials(seed) {
+    var phraseIndexes = [...Array(phrases.length).keys()]
+        /* Randomize array in-place using Durstenfeld shuffle algorithm */
+        // via https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    for (var i = phraseIndexes.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = phraseIndexes[i];
+        phraseIndexes[i] = phraseIndexes[j];
+        phraseIndexes[j] = temp;
+    }
+    // TODO: Implement actual trial ordering from seed
+    var trialOrder = [3, 0, 1, 2, 3];
+    for (let i = 0; i < 4; i++) {
+        trials[i] = trialVariables[trialOrder[i]];
+        if (debugMode) {
+            trials[i].phrases = ["aaa", "bbb", "ccc", "ddd", "eee"];
+        } else {
+            trials[i].phrases = phraseIndexes.slice(i * 5, (i + 1) * 5).map(i => phrases[i]);
+        }
+    }
+    await performTrial(0);
 }
 
 function resetEntry() {
     document.getElementById("entry").innerHTML = "&gt;&gt; ";
     document.getElementById("prompt").innerHTML = " ";
+    promptEntryValue = "";
 }
 
-function waitForEntry(prompt) {
+async function waitForEntry(prompt) {
     promptPromise = new Promise((resolve, reject) => {
         promptPromiseResolve = resolve;
     });
     promptExpectedValue = prompt;
-    return promptPromise;
+    await promptPromise;
 }
 
-function performTrial(number) {
+async function performTrial(number) {
     document.getElementById("greeting").style.display = "none";
-    const trial = getTrialVariables(number);
+    const trial = trials[number];
+    resetEntry();
     document.getElementById("prompt").innerHTML = trial.instructions;
     promptHintsEnabled = trial.showHints;
     initKeyboard(trial.layout);
     adjustHints("ok");
-    waitForEntry("ok").then(() => {
+    await waitForEntry("ok");
+    for (let currentPhrase = 0; currentPhrase < trial.phrases.length; currentPhrase++) {
         resetEntry();
-    });
+        document.getElementById("prompt").innerHTML = trial.phrases[currentPhrase];
+        await waitForEntry(trial.phrases[currentPhrase]);
+    }
+    if (number < 3) {
+        await performTrial(number + 1);
+    }
 }
 
-function finishGreeting() {
+async function finishGreeting() {
     const formData = new FormData(document.getElementById("greeting").querySelector("form"));
     const jsonData = Object.fromEntries(formData.entries());
 
-    storeResponse(jsonData).then(() => performTrial(0));
+    const text = await storeResponse(jsonData);
+    await startTrials(text);
 }
 
-function init() {
+async function init() {
     //showGreeting();
-    performTrial(0);
+    await startTrials("ABCD");
 }
 
 document.addEventListener('DOMContentLoaded', init);
