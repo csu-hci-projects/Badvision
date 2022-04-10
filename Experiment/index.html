@@ -7,7 +7,7 @@
       <h2>Badvision Keyboard Experiment</h2>
       <p>Hello and thank you for participating in the Badvision keyboard experiment!</p>      
       <p>The goal of this experiment is to compare how well you type using different types of keyboards and also to test out a protype typing hint system.</p>
-      <p class='warning'>Please note this requires a touchscreen device and will not work with a mouse!</p>
+      <p class='warning'>Please note this requires a tablet and will not work with a mouse!</p>
       <p>There are a total of 4 different trials, but the whole experiment should not take more than 15 minutes in total.</p>
       <p>None of the data collected will be published or shared with any parties, this is only for a graded class project.</p>
       <hr>
@@ -55,7 +55,7 @@
           </select></td>
         </tr>
         <tr>
-          <td>Do you have any impairments that affect your typing on regular basis?</td>
+          <td>Do you have any impairment that normally affects typing?</td>
           <td>
             <select name="impairment">
               <option value="none">None</option>
@@ -74,7 +74,7 @@
           </td>
         </tr>
         <tr>
-          <td>If so, how much do you feel this impairment affects your typing?</td>
+          <td>If so, how much does this impairment affect typing?</td>
           <td>
             <table class="scale">
               <tr>
@@ -113,8 +113,89 @@
         </tr>
       </table>
       </form>
-
     </div>
+    <div id="closing">
+      <h2>Badvision Keyboard Experiment</h2>
+      <p>Thank you again for participating in the Badvision keyboard experiment!</p>      
+      <p>Please take an extra couple of minutes to complete this survey, it really helps a lot!</p>
+      <form>
+      <table class="survey">
+        <tr>
+          <td>Do your prefer the experimental keyboard compared to the standard keyboard?</td>
+          <td>
+            <table class="scale">
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="likeMetropolis" value="1"></td>
+                <td><input type="radio" name="likeMetropolis" value="2"></td>
+                <td><input type="radio" name="likeMetropolis" value="3"></td>
+                <td><input type="radio" name="likeMetropolis" value="4"></td>
+                <td><input type="radio" name="likeMetropolis" value="5"></td>
+                <td><input type="radio" name="likeMetropolis" value="6"></td>
+                <td><input type="radio" name="likeMetropolis" value="7"></td>
+              </tr>
+              <tr>
+                <td colspan="1">Not at all</td>
+                <td colspan="4" class="center">Neutral</td>
+                <td colspan="2" class="right">A lot</td>
+              </tr>
+            </table>
+        </td></tr>
+        <tr>
+          <td>How likely would you be interested in a physical version?</td>
+          <td>
+            <table class="scale">
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="physical" value="1"></td>
+                <td><input type="radio" name="physical" value="2"></td>
+                <td><input type="radio" name="physical" value="3"></td>
+                <td><input type="radio" name="physical" value="4"></td>
+                <td><input type="radio" name="physical" value="5"></td>
+                <td><input type="radio" name="physical" value="6"></td>
+                <td><input type="radio" name="physical" value="7"></td>
+              </tr>
+              <tr>
+                <td colspan="1">Very<br>little</td>
+                <td colspan="4" class="center">Somewhat</td>
+                <td colspan="2" class="right">A lot</td>
+              </tr>
+            </table>
+        </td></tr>
+        <tr>
+          <td>Please leave any other comments/criticisms you may have. For example, what are some ideas you would like to see?  What did you like/not like about this experiment?</td>
+          <td>
+            <textarea name="feedback" rows=5 cols=60></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            Thank you for filling out this form! Press the submit button when you are finshed.
+            <br/>
+            <div class="center">
+              <input type="button" value="Submit" onclick="finishClosing()">
+            </div>
+          </td>
+        </tr>
+      </table>
+      </form>
+    </div>    
     <div id="prompt"></div>
     <div id="entry"></div>
     <div id="keyboard"></div>

@@ -1,10 +1,20 @@
 body {
     background: black;
+    touch-action: manipulation;
+}
+
+#keyboard {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
 }
 
 .keyboard {
     display: flex;
     flex-direction: column;
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .keyboard .row {
@@ -12,7 +22,8 @@ body {
     flex-direction: row;
 }
 
-.keyboard.rectangular .key.hint {
+.keyboard.rectangular .key.hint,
+#prompt .hint {
     box-shadow: inset 0 0 5px #fff, /* inner white */
     inset 2px 0 8px #f0f, /* inner left magenta short */
     inset -2px 0 8px #0ff, /* inner right cyan short */
@@ -44,6 +55,7 @@ body {
     font-size: 50px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    touch-action: manipulation;
 }
 
 .key[data-key=' '] {
@@ -62,6 +74,7 @@ body {
 .keyboard.rectangular .key,
 .keyboard.rectangular .spacer {
     padding-top: 10px;
+    min-width: 70px;
     width: 70px;
     height: 70px;
     margin: 8px;
@@ -111,35 +124,48 @@ body {
     padding: 15px;
 }
 
+#prompt .done {
+    color: #228;
+}
+
 #entry {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 36px;
 }
 
-#greeting {
+#greeting,
+#closing {
     background-color: #444;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
+    display: none;
 }
 
 #greeting,
-#greeting td {
+#greeting td,
+#closing,
+#closing td {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#greeting table.survey>tbody>tr>td:nth-child(1) {
+.warning {
+    color: #f88;
+    font-style: italic;
+}
+
+table.survey>tbody>tr>td:nth-child(1) {
     width: 33%
 }
 
-#greeting table.survey>tbody>tr:nth-child(odd) {
+table.survey>tbody>tr:nth-child(odd) {
     background-color: #333;
 }
 
-#greeting table.survey>tbody>tr>td {
+table.survey>tbody>tr>td {
     padding: 10px;
 }
 

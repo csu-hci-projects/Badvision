@@ -1,5 +1,5 @@
 const click = new Audio("click.wav");
-const debugMode = true;
+const debugMode = !location.host;
 
 // pipe is treated as a spacer (not a visible key)
 const layouts = {
@@ -36,29 +36,32 @@ const layouts = {
 var promptPromise;
 var promptPromiseResolve;
 var promptExpectedValue;
+var promptExpectedValueFull;
 var promptEntryValue;
 var promptHintsEnabled;
 var trials = [];
+const okText = preparePrompt("OK");
+const promptCommon = "Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type " + okText + " to continue.";
 const trialVariables = [{
-        instructions: "In this trial you will see a standard keyboard.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
+        instructions: "In this trial you will see a standard keyboard. " + promptCommon,
         layout: layouts.qwerty,
         showHints: false,
         phrases: []
     },
     {
-        instructions: "In this trial you will see an experimental keyboard.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
+        instructions: "In this trial you will see an experimental keyboard. " + promptCommon,
         layout: layouts.metropolis,
         showHints: false,
         phrases: []
     },
     {
-        instructions: "In this trial you will see a standard keyboard and typing hints.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
+        instructions: "In this trial you will see a standard keyboard and <span class='hint'>typing hints</span>. " + promptCommon,
         layout: layouts.qwerty,
         showHints: true,
         phrases: []
     },
     {
-        instructions: "In this trial you will see the experimental keyboard and typing hints.  Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type OK to continue.",
+        instructions: "In this trial you will see the experimental keyboard and <span class='hint'>typing hints</span>. " + promptCommon,
         layout: layouts.metropolis,
         showHints: true,
         phrases: []
@@ -104,6 +107,10 @@ function findHints(source) {
     let current = markov;
     for (let i = 0; i < source.length; i++) {
         current = current[source.substring(0, i + 1)];
+        if (!current) {
+            console.log(`${source} has no recommendations`);
+            current = {};
+        }
     }
     let hints = "";
     for (let k of Object.keys(current)) {
@@ -141,6 +148,9 @@ function keyPressed(key) {
             break;
         }
     }
+    for (let i = 0; i < promptExpectedValueFull.length - promptExpectedValue.length; i++) {
+        document.querySelector(`#prompt > span[data-idx='${i}']`).classList.add("done");
+    }
     if (promptHintsEnabled) {
         let startIndex = promptEntryValue.length;
         for (let i = promptEntryValue.length - 1; i > promptEntryValue.length - 3; i--) {
@@ -156,6 +166,14 @@ function keyPressed(key) {
     } else {
         adjustHints("");
     }
+}
+
+function preparePrompt(str) {
+    let out = "";
+    for (let i = 0; i < str.length; i++) {
+        out += `<span data-idx='${i}'>${str[i]}</span>`;
+    }
+    return out;
 }
 
 function buildKeyboard(layout) {
@@ -182,20 +200,18 @@ function setupKeys() {
     // Register key handler for touch events
     // Note this does not register mouse clicks!
     for (const key of document.getElementsByClassName("key")) {
-        key.addEventListener("touchstart", e => keyPressed(key.getAttribute("data-key")), { passive: true });
-        if (debugMode) {
-            key.addEventListener("mousedown", e => keyPressed(key.getAttribute("data-key")), { passive: true });
-        }
+        key.addEventListener("pointerdown", e => {
+            if (!debugMode && e.type === 'mouse') {
+                return false;
+            }
+            keyPressed(key.getAttribute("data-key"));
+        }, { passive: true });
     }
 }
 
 function initKeyboard(layout) {
     document.getElementById("keyboard").innerHTML = buildKeyboard(layout);
     setupKeys();
-}
-
-function showGreeting() {
-    document.getElementById("greeting").style.display = "block";
 }
 
 // Seed is returned by server after initial form submit
@@ -234,11 +250,13 @@ async function waitForEntry(prompt) {
         promptPromiseResolve = resolve;
     });
     promptExpectedValue = prompt;
+    promptExpectedValueFull = prompt;
     await promptPromise;
 }
 
 async function performTrial(number) {
     document.getElementById("greeting").style.display = "none";
+    document.getElementById("prompt").style.display = "block";
     const trial = trials[number];
     resetEntry();
     document.getElementById("prompt").innerHTML = trial.instructions;
@@ -248,25 +266,42 @@ async function performTrial(number) {
     await waitForEntry("ok");
     for (let currentPhrase = 0; currentPhrase < trial.phrases.length; currentPhrase++) {
         resetEntry();
-        document.getElementById("prompt").innerHTML = trial.phrases[currentPhrase];
+        document.getElementById("prompt").innerHTML = preparePrompt(trial.phrases[currentPhrase]);
         await waitForEntry(trial.phrases[currentPhrase]);
     }
     if (number < 3) {
         await performTrial(number + 1);
+    } else {
+        showClosing();
     }
+}
+
+function showGreeting() {
+    document.getElementById("greeting").style.display = "block";
+    document.getElementById("prompt").style.display = "none";
+}
+
+function showClosing() {
+    document.getElementById("closing").style.display = "block";
+    document.getElementById("prompt").style.display = "none";
+    document.getElementById("keyboard").style.display = "none";
+    document.getElementById("entry").style.display = "none";
 }
 
 async function finishGreeting() {
     const formData = new FormData(document.getElementById("greeting").querySelector("form"));
     const jsonData = Object.fromEntries(formData.entries());
 
-    const text = await storeResponse(jsonData);
+    if (!debugMode) {
+        const text = await storeResponse(jsonData);
+    } else {
+        text = "0123";
+    }
     await startTrials(text);
 }
 
 async function init() {
-    //showGreeting();
-    await startTrials("ABCD");
+    showGreeting();
 }
 
 document.addEventListener('DOMContentLoaded', init);
