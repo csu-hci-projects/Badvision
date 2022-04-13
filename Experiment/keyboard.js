@@ -300,7 +300,22 @@ async function finishGreeting() {
     await startTrials(text);
 }
 
+async function finishGreeting() {
+    const formData = new FormData(document.getElementById("closing").querySelector("form"));
+    const jsonData = Object.fromEntries(formData.entries());
+
+    if (!debugMode) {
+        await storeResponse(jsonData);
+    }
+    document.getElementById("closing").innerHTML = `
+        <h1>Thank you!</h1>
+        Your responses have been submitted.  You may close this webpage now.
+    `;
+}
+
 async function init() {
+    document.getElementById("greetingSubmit").onclick = finishGreeting;
+    document.getElementById("closingSubmit").onclick = finishClosing;
     showGreeting();
 }
 
