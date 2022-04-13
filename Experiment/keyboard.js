@@ -292,8 +292,9 @@ async function finishGreeting() {
     const formData = new FormData(document.getElementById("greeting").querySelector("form"));
     const jsonData = Object.fromEntries(formData.entries());
 
+    let text;
     if (!debugMode) {
-        const text = await storeResponse(jsonData);
+        text = await storeResponse(jsonData);
     } else {
         text = "0123";
     }
