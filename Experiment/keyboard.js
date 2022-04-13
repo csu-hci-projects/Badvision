@@ -300,7 +300,7 @@ async function finishGreeting() {
     await startTrials(text);
 }
 
-async function finishGreeting() {
+async function finishClosing() {
     const formData = new FormData(document.getElementById("closing").querySelector("form"));
     const jsonData = Object.fromEntries(formData.entries());
 
