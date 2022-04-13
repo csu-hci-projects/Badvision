@@ -1,5 +1,5 @@
 const click = new Audio("click.wav");
-const debugMode = !location.host;
+let debugMode = !location.host;
 
 // pipe is treated as a spacer (not a visible key)
 const layouts = {
