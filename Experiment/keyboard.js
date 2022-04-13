@@ -6,19 +6,19 @@ const layouts = {
     qwerty: {
         style: "rectangular",
         rows: [
-            "qwertyuiop",
-            "asdfghjkl",
-            "|zxcvbnm,.",
+            "qwertyuiop-",
+            "asdfghjkl;!",
+            "|zxcvbnm,.?",
             "||| "
         ],
     },
     metropolis: {
         style: "hexagonal",
         rows: [
-            "|bdlf",
-            "caermq",
+            "|bdlf-;",
+            "caermq?",
             "jhn oyz",
-            "gitsuv",
+            "gitsuv!",
             "|kpwx,."
         ]
     },
