@@ -28,14 +28,14 @@ function main(postData) {
     println("This is node.js!");
 
     process.argv.forEach((val, index) => {
-        println(`${index}: ${val}`)
+        println(`${index}: ${val}\n\n`)
     })
 
     for (const v in process.env) {
-        println(`${v} ${process.env[v]}`)
+        println(`${v} ${process.env[v]}\n\n`)
     }
 
-    println(`Post data: ${postData}`);
+    println(`Post data: ${postData}\n\n`);
 
     // Needed to terminate the chunked stream
     println("");

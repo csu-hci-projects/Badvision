@@ -79,7 +79,7 @@ const fetch_retry = (url, options, n) => fetch(url, options).catch(
 );
 
 function storeResponse(data) {
-    return fetch_retry("//www.cs.colostate.edu/~bdvision/cgi-bin/store_data.js", {
+    return fetch_retry("cgi-bin/store_data.js", {
             method: "post",
             headers: {
                 // "Content-Type": "application/json"
