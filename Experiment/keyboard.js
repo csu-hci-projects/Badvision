@@ -331,8 +331,7 @@ async function init() {
     document.getElementById("greetingSubmit").onclick = finishGreeting;
     document.getElementById("closingSubmit").onclick = finishClosing;
     document.getElementById("startTrial").onclick = startTrials;
-    //    showGreeting();
-    showInstructions();
+    showGreeting();
 }
 
 document.addEventListener('DOMContentLoaded', init);
