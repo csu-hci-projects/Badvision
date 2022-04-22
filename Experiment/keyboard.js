@@ -40,6 +40,7 @@ var promptExpectedValueFull;
 var promptEntryValue;
 var promptHintsEnabled;
 var trials = [];
+var trialOrder = "0123";
 const okText = preparePrompt("OK");
 const promptCommon = "Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type " + okText + " to continue.";
 const trialVariables = [{
@@ -214,9 +215,9 @@ function initKeyboard(layout) {
     setupKeys();
 }
 
-// Seed is returned by server after initial form submit
+// Trial order is sent by the server and stored in trialOrder global
 // This is so that we can follow a latin-squares assignment
-async function startTrials(seed) {
+async function startTrials() {
     var phraseIndexes = [...Array(phrases.length).keys()]
         /* Randomize array in-place using Durstenfeld shuffle algorithm */
         // via https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -255,8 +256,7 @@ async function waitForEntry(prompt) {
 }
 
 async function performTrial(number) {
-    document.getElementById("greeting").style.display = "none";
-    document.getElementById("prompt").style.display = "block";
+    showExperiment();
     const trial = trials[number];
     resetEntry();
     document.getElementById("prompt").innerHTML = trial.instructions;
@@ -281,6 +281,18 @@ function showGreeting() {
     document.getElementById("prompt").style.display = "none";
 }
 
+function showInstructions() {
+    document.getElementById("greeting").style.display = "none";
+    document.getElementById("instructions").style.display = "block";
+    document.getElementById("prompt").style.display = "none";
+}
+
+function showExperiment() {
+    document.getElementById("greeting").style.display = "none";
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("prompt").style.display = "block";
+}
+
 function showClosing() {
     document.getElementById("closing").style.display = "block";
     document.getElementById("prompt").style.display = "none";
@@ -298,7 +310,8 @@ async function finishGreeting() {
     } else {
         text = "0123";
     }
-    await startTrials(text);
+    trialOrder = text;
+    showInstructions();
 }
 
 async function finishClosing() {
@@ -317,7 +330,9 @@ async function finishClosing() {
 async function init() {
     document.getElementById("greetingSubmit").onclick = finishGreeting;
     document.getElementById("closingSubmit").onclick = finishClosing;
-    showGreeting();
+    document.getElementById("startTrial").onclick = startTrials;
+    //    showGreeting();
+    showInstructions();
 }
 
 document.addEventListener('DOMContentLoaded', init);

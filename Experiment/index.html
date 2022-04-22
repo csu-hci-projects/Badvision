@@ -8,10 +8,13 @@
       <p>Hello and thank you for participating in the Badvision keyboard experiment!</p>      
       <p>The goal of this experiment is to compare how well you type using different types of keyboards and also to test out a protype typing hint system.</p>
       <p class='warning'>Please note this requires a tablet and will not work with a mouse!</p>
-      <p>There are a total of 4 different trials, but the whole experiment should not take more than 15 minutes in total.</p>
       <p>None of the data collected will be published or shared with any parties, this is only for a graded class project.</p>
+      <p>There are a total of 4 different trials, but the whole experiment should not take more than 15 minutes in total.
+      Please try to participate in a quiet location without distraction if possible.  Between each of the 4 sections, you can pause
+      for as long as you'd like and come back to it and complete later.
+      </p>
       <hr>
-      <p>Before we get started, please fill out the following form and press the Submit button</p>
+      <p>Before we get started, please fill out the following form and press the Submit button.</p>
       <form>
       <table class="survey">
         <tr>
@@ -55,14 +58,17 @@
           </select></td>
         </tr>
         <tr>
-          <td>Do you have any impairment that normally affects typing?</td>
           <td>
+            Do you have any impairment that normally affects typing?
+          </td>
+          <td>
+            <p class="warning">None of this is shared with anyone, it is only for a class assignment</p>
             <select name="impairment">
               <option value="none">None</option>
               <option value="fatigue">Chronic fatigue</option>
               <option value="injury">Past/present injuries</option>
-              <option value="dyslexia">Dyslexia (reading)</option>
-              <option value="dysgraphia">Dysgraphia (writing)</option>
+              <option value="dyslexia">Dyslexia</option>
+              <option value="dysgraphia">Dysgraphia</option>
               <option value="vision">Vision impairment</option>
               <option value="vertigo">Vertigo/balance</option>
               <option value="cp">Cerebal Palsy</option>              
@@ -113,6 +119,20 @@
         </tr>
       </table>
       </form>
+    </div>
+    <div id="instructions">
+    <h2>Experiment instructions</h2>
+    <img src="typing example.gif" style="float:right">
+    <p>In this experiment you type sentences that appear at the top of the screen.</p>
+    <p>You do not need to correct errors.  Just keep typing.</p>
+    <p class="warning">If you make a mistake, start from the first white letter in the sentence.  Letters you already typed turn blue.</p>
+    <p>There are 4 trials with different keyboards.  <span class="warning">At the beginning of each trial you can take as long as you want before starting.</span></p>
+    <p>So if you have to get up, return a phone call, stretch your legs that is the best time before starting the next trial.</p>
+    <p>The whole experiment should take no more than 15-25 minutes.</p>
+    <p><span class="warning">Please complete the whole experiment</span> as I cannot use incomplete trial data.</p>
+    <p>You're helping me a lot and I really appreciate your time and assistance.</p>
+    <p>-Brendan</p>
+    <input type="button" id="startTrial" value="Begin!">
     </div>
     <div id="closing">
       <h2>Badvision Keyboard Experiment</h2>

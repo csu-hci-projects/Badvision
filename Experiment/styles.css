@@ -135,7 +135,8 @@ body {
 }
 
 #greeting,
-#closing {
+#closing,
+#instructions {
     background-color: #444;
     width: 50%;
     margin-left: auto;
@@ -147,7 +148,8 @@ body {
 #greeting,
 #greeting td,
 #closing,
-#closing td {
+#closing td,
+#instructions {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }

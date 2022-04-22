@@ -35,3 +35,34 @@ When submitting questionnaires,  the browser includes device details as well as 
 Objective of what I am doing
 
 Ultimately I want to reproduce the near 50-wpm performance of Metropolis keyboard that Zhai and Smith reported. I also want to demonstrate how highlighted key suggestions improve performance because  modern gaming keyboards can adopt this feature. Additionally feedback from subjects with regular typing difficulties is valuable to determine if further application of Metropolis offers a social benefit.
+
+Process flow: (Note: Render with sequencediagram.org)
+title General apparatus flow
+
+actor Subject
+
+UI->Subject: Render initial questionnaire
+Subject->UI: Submit first questionnaire
+UI->Server: Post questionnaire and device details
+Server->Server:Store answers in flat file
+Server->UI: Provide order of test conditions
+UI->UI: Prepare tests, randomize prompts
+loop for each of 4 test conditions
+UI->Subject: Show trial instructions
+Subject->UI: Types OK
+loop for each of 5 prompts
+activate UI
+UI->Subject: Show new prompt
+activate Subject
+Subject->UI: Types prompt
+deactivate Subject
+deactivate UI
+end 
+UI->Server: Send trial data
+Server->Server: Store in flat file
+end
+UI->Subject: Show closing questionnaire
+Subject->UI: Submit answers
+UI->Server: Send closing questionnaire data
+Server->Server: Store questionnaire data
+UI->Subject: Show closing thank you message
