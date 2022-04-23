@@ -14,11 +14,11 @@ const balancedLatinSquares = [
     "1203",
     "2310",
     "3021"
-]
+];
 
 // Begin: Request input process
 process.stdin.on('data', function(data) { postData += data; });
-process.stdin.on('end', async function() { await main(postData) });
+process.stdin.on('end', () => main(postData));
 // End: Request input process
 
 function print(data) {
@@ -32,8 +32,8 @@ function println(data) {
     responseBuffer = "";
 }
 
-async function getTrialOrder() {
-    const files = await fs.readdir(targetDir);
+function getTrialOrder() {
+    const files = fs.readdirSync(targetDir);
     const idx = files.length % balancedLatinSquares.length;
     return balancedLatinSquares[idx];
 }
@@ -76,7 +76,7 @@ async function main(postData) {
     }
 
     if (inputData && inputData.device) {
-        const order = await getTrialOrder();
+        const order = getTrialOrder();
         requestDetails.trialOrder = order;
         println(order);
     }
