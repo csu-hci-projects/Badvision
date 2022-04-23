@@ -43,7 +43,7 @@ var promptHintsEnabled;
 var trials = [];
 var trialOrder = "0123";
 const okText = preparePrompt("OK");
-const promptCommon = "Please type the words shown in this box and don't worry if you make a mistake, just keep typing.  Type " + okText + " to continue.";
+const promptCommon = "If you need to take a break leave this page open until you come back.  In this section please type the words shown at the top. If you make a mistake, just keep typing.  Type " + okText + " to continue.";
 const trialVariables = [{
         instructions: "In this trial you will see a standard keyboard. " + promptCommon,
         layout: layouts.qwerty,
