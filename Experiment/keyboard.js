@@ -42,6 +42,8 @@ var promptEntryValue;
 var promptHintsEnabled;
 var trials = [];
 var trialOrder = "0123";
+var currentTrial = {};
+var currentPrompt = {};
 const okText = preparePrompt("OK");
 const promptCommon = "If you need to take a break leave this page open until you come back.  In this section please type the words shown at the top. If you make a mistake, just keep typing.  Type " + okText + " to continue.";
 const trialVariables = [{
@@ -127,6 +129,11 @@ function findHints(source) {
 }
 
 function keyPressed(key) {
+    var keystroke = {
+        time: ((new Date()).toISOString()),
+        key: key
+    };
+    currentPrompt.keystrokes.push(keystroke);
     document.getElementById("entry").innerHTML += key;
     promptEntryValue += key;
     click.play();
@@ -141,6 +148,11 @@ function keyPressed(key) {
     for (let i = 0; i < Math.min(promptExpectedValue.length, 2); i++) {
         const nextChar = promptExpectedValue.toLowerCase()[i];
         if (nextChar == key.toLowerCase()) {
+            if (i == 0) {
+                keystroke.type = 'correct';
+            } else {
+                keystroke.type = 'skip';
+            }
             promptExpectedValue = promptExpectedValue.substring(i + 1);
             if (promptExpectedValue.length === 0) {
                 promptPromiseResolve(promptEntryValue);
@@ -149,6 +161,9 @@ function keyPressed(key) {
             }
             break;
         }
+    }
+    if (!keystroke.type) {
+        keystroke.type = 'incorrect';
     }
     for (let i = 0; i < promptExpectedValueFull.length - promptExpectedValue.length; i++) {
         document.querySelector(`#prompt > span[data-idx='${i}']`).classList.add("done");
@@ -255,7 +270,14 @@ async function waitForEntry(prompt) {
     await promptPromise;
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 async function performTrial(number) {
+    currentTrial = {
+        start: (new Date()).toISOString(),
+        prompts: []
+    };
     showExperiment();
     const trial = trials[number];
     resetEntry();
@@ -266,8 +288,20 @@ async function performTrial(number) {
     await waitForEntry("ok");
     for (let currentPhrase = 0; currentPhrase < trial.phrases.length; currentPhrase++) {
         resetEntry();
+        let delay = Math.random() * 500 + 500;
+        await sleep(delay);
         document.getElementById("prompt").innerHTML = preparePrompt(trial.phrases[currentPhrase]);
+        currentPrompt = {
+            start: (new Date()).toISOString(),
+            phrase: phrases[currentPhrase],
+            keystrokes: []
+        };
+        currentTrial.prompts.push(currentPrompt);
+
         await waitForEntry(trial.phrases[currentPhrase]);
+    }
+    if (!isLocalHost) {
+        await storeResponse(currentTrial);
     }
     if (number < 3) {
         await performTrial(number + 1);
