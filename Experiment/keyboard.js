@@ -278,6 +278,9 @@ async function performTrial(number) {
         start: (new Date()).toISOString(),
         prompts: []
     };
+    currentPrompt = {
+        keystrokes: []
+    };
     showExperiment();
     const trial = trials[number];
     resetEntry();
