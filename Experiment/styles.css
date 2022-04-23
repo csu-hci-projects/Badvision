@@ -12,7 +12,6 @@ body {
 .keyboard {
     display: flex;
     flex-direction: column;
-    width: 750px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -34,7 +33,12 @@ body {
     1px 0 8px #0ff/* outer right cyan */
 }
 
+.keyboard.rectangular {
+    width: 1000px;
+}
+
 .keyboard.hexagonal {
+    width: 750px;
     margin-top: 20px;
 }
 
@@ -189,4 +193,12 @@ table.survey>tbody>tr>td {
 
 .scale .right {
     padding-left: 40px;
+}
+
+input[type='button'] {
+    font-size: 24px;
+    padding: 5px 20px;
+    background-color: #080;
+    color: #fe8;
+    border-radius: 5px;
 }
