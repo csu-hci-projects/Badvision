@@ -38,7 +38,7 @@ async function getTrialOrder() {
     return balancedLatinSquares[idx];
 }
 
-function main(postData) {
+async function main(postData) {
     console.log("Access-Control-Allow-Origin:*");
     console.log("Access-Control-Allow-Headers:*");
     console.log("Content-Type: text/plain");
@@ -83,7 +83,7 @@ function main(postData) {
 
     // TODO: Figure out when it's the initial survey
     if (true) {
-        println(getTrialOrder());
+        println(await getTrialOrder());
     }
 
     // Needed to terminate the chunked stream
