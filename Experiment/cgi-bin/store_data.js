@@ -69,7 +69,7 @@ function main(postData) {
         device: deviceDetails,
         request: requestDetails
     }
-    fs.appendFileSync(`~/badvisionKeyboard/${userIp}_${userHash}.json`, JSON.stringify(dataLog));
+    fs.appendFileSync(`/s/chopin/b/grad/bdvision/badvisionKeyboard/${userIp}_${userHash}.json`, JSON.stringify(dataLog));
 
     // Needed to terminate the chunked stream
     println("");
