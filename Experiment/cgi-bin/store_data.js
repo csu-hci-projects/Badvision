@@ -1,13 +1,21 @@
 #!/bin/env /bin/node
 
 const crypto = require('crypto');
-const { request } = require('http');
+const fs = require('fs');
 
 let postData = "";
 let responseBuffer = "";
+const balancedLatinSquares = [
+    "0132",
+    "1203",
+    "2310",
+    "3021"
+]
 
+// Begin: Request input process
 process.stdin.on('data', function(data) { postData += data; });
 process.stdin.on('end', () => main(postData));
+// End: Request input process
 
 function print(data) {
     responseBuffer += data;
@@ -31,22 +39,37 @@ function main(postData) {
     const cookies = process.env['HTTP_COOKIE'];
     const userHash = crypto.createHash('md5').update(cookies).digest("hex");
     const deviceDetails = {
-        ip: process.env['REMOTE_ADDR'],
+        ip: userIp,
         userAgent: process.env['HTTP_USER_AGENT'],
         userHash: userHash,
-        chromium: {
+        clientHints: {
             agent: process.env['HTTP_SEC_CH_UA'],
-            mobile: process.env['HTTP_SEC_UA_MOBILE'],
-            platform: process.env['HTTP_SEC_UA_PLATFORM']
+            mobile: process.env['HTTP_SEC_CH_UA_MOBILE'],
+            platform: process.env['HTTP_SEC_CH_UA_PLATFORM']
         }
     };
+
+    let inputData = {}
+    if (inputData) {
+        try {
+            inputData = JSON.parse(postData)
+        } catch (err) {
+            inputData = postData
+                // Do nothing, just don't parse the data
+        }
+    }
+
     const requestDetails = {
         time: (new Date()).toISOString(),
         query: process.env['QUERY_STRING'],
-        body: responseBuffer
+        body: inputData
     }
-    println(`deviceDetails: ${JSON.stringify(deviceDetails)}\n`)
-    println(`requestDetails: ${JSON.stringify(requestDetails)}\n`)
+
+    const dataLog = {
+        device: deviceDetails,
+        request: requestDetails
+    }
+    fs.appendFileSync(`~/badvisionKeyboard/${userIp}_${userHash}.json`, JSON.stringify(dataLog));
 
     // Needed to terminate the chunked stream
     println("");
