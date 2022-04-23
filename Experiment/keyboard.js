@@ -296,7 +296,7 @@ async function performTrial(number) {
         document.getElementById("prompt").innerHTML = preparePrompt(trial.phrases[currentPhrase]);
         currentPrompt = {
             start: (new Date()).toISOString(),
-            phrase: phrases[currentPhrase],
+            phrase: trial.phrases[currentPhrase],
             keystrokes: []
         };
         currentTrial.prompts.push(currentPrompt);
