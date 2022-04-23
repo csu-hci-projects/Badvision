@@ -75,16 +75,17 @@ async function main(postData) {
         body: inputData
     }
 
+    if (inputData && inputData.device) {
+        const order = await getTrialOrder();
+        requestDetails.trialOrder = order;
+        println(order);
+    }
+
     const dataLog = {
         device: deviceDetails,
         request: requestDetails
     }
     fs.appendFileSync(`${targetDir}/${userIp}_${userHash}.json`, `${JSON.stringify(dataLog)},\n`);
-
-    // TODO: Figure out when it's the initial survey
-    if (true) {
-        println(await getTrialOrder());
-    }
 
     // Needed to terminate the chunked stream
     println("");
