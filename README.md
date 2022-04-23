@@ -8,7 +8,7 @@ For a more functional overview see About.md
 
 This project is divided into separate modules:
 
-- Experiment : This contains the website sources, images, and data files for the experiment itself.  Deploy this directly to your CS home folder and ensure the permissions are correct (755) so that visitors can access it.  There is nothing else to do but browse to the html page.  Note that keyboard.js is hard-coded to my user folder so you will have to modify the relevant code to call the script residing in your own cgi-bin folder.
+- Experiment : This contains the website sources, images, and data files for the experiment itself.  Deploy this directly to your CS home folder and ensure the permissions are correct (755) so that visitors can access it.  There is nothing else to do but browse to the html page.  Before posting, you shoud review the script residing in your own cgi-bin folder to understand how it works first.
 
 - MarkovGenerator : This contains the Markov chain predictor generator, the output of which goes into the experiment.  This is run one-time from a python notebook.  I used VSCode but any Python development tool that understand the ipynb notebook format should work.  This uses the files in the training folder to produce the phrases.js predictive typing model.
 

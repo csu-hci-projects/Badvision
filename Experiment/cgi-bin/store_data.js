@@ -1,5 +1,8 @@
 #!/bin/env /bin/node
 
+const crypto = require('crypto');
+const { request } = require('http');
+
 let postData = "";
 let responseBuffer = "";
 
@@ -24,18 +27,26 @@ function main(postData) {
     console.log("Transfer-Encoding: chunked");
     console.log();
 
-    println("Hello world!\n");
-    println("This is node.js!");
-
-    process.argv.forEach((val, index) => {
-        println(`${index}: ${val}\n\n`)
-    })
-
-    for (const v in process.env) {
-        println(`${v} ${process.env[v]}\n\n`)
+    const userIp = process.env['REMOTE_ADDR'];
+    const cookies = process.env['HTTP_COOKIE'];
+    const userHash = crypto.createHash('md5').update(cookies).digest("hex");
+    const deviceDetails = {
+        ip: process.env['REMOTE_ADDR'],
+        userAgent: process.env['HTTP_USER_AGENT'],
+        userHash: userHash,
+        chromium: {
+            agent: process.env['HTTP_SEC_CH_UA'],
+            mobile: process.env['HTTP_SEC_UA_MOBILE'],
+            platform: process.env['HTTP_SEC_UA_PLATFORM']
+        }
+    };
+    const requestDetails = {
+        time: (new Date()).toISOString(),
+        query: process.env['QUERY_STRING'],
+        body: responseBuffer
     }
-
-    println(`Post data: ${postData}\n\n`);
+    println(`deviceDetails: ${JSON.stringify(deviceDetails)}\n`)
+    println(`requestDetails: ${JSON.stringify(requestDetails)}\n`)
 
     // Needed to terminate the chunked stream
     println("");
