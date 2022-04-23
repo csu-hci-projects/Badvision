@@ -46,16 +46,16 @@ async function main(postData) {
     console.log();
 
     const userIp = process.env['REMOTE_ADDR'];
-    const cookies = process.env['HTTP_COOKIE'];
+    const cookies = process.env['HTTP_COOKIE'] || "NONE";
     const userHash = crypto.createHash('md5').update(cookies).digest("hex");
     const deviceDetails = {
         ip: userIp,
-        userAgent: process.env['HTTP_USER_AGENT'],
+        userAgent: process.env['HTTP_USER_AGENT'] || "UNKNOWN",
         userHash: userHash,
         clientHints: {
-            agent: process.env['HTTP_SEC_CH_UA'],
-            mobile: process.env['HTTP_SEC_CH_UA_MOBILE'],
-            platform: process.env['HTTP_SEC_CH_UA_PLATFORM']
+            agent: process.env['HTTP_SEC_CH_UA'] || "NONE",
+            mobile: process.env['HTTP_SEC_CH_UA_MOBILE'] || "NONE",
+            platform: process.env['HTTP_SEC_CH_UA_PLATFORM'] || "NONE"
         }
     };
 
