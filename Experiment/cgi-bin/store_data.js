@@ -18,7 +18,7 @@ const balancedLatinSquares = [
 
 // Begin: Request input process
 process.stdin.on('data', function(data) { postData += data; });
-process.stdin.on('end', () => main(postData));
+process.stdin.on('end', () => await main(postData));
 // End: Request input process
 
 function print(data) {
