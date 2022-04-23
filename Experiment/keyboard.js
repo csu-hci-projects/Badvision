@@ -1,5 +1,6 @@
 const click = new Audio("click.wav");
-let debugMode = !location.host;
+let isLocalHost = !location.host;
+let debugMode = isLocalHost;
 
 // pipe is treated as a spacer (not a visible key)
 const layouts = {
@@ -227,8 +228,7 @@ async function startTrials() {
         phraseIndexes[i] = phraseIndexes[j];
         phraseIndexes[j] = temp;
     }
-    // TODO: Implement actual trial ordering from seed
-    var trialOrder = [3, 0, 1, 2, 3];
+    // Note trialOrder should have come from the server when submitting the questionnaire.
     for (let i = 0; i < 4; i++) {
         trials[i] = trialVariables[trialOrder[i]];
         if (debugMode) {
@@ -304,13 +304,9 @@ async function finishGreeting() {
     const formData = new FormData(document.getElementById("greeting").querySelector("form"));
     const jsonData = Object.fromEntries(formData.entries());
 
-    let text;
-    if (!debugMode) {
-        text = await storeResponse(jsonData);
-    } else {
-        text = "0123";
+    if (!isLocalHost) {
+        trialOrder = await storeResponse(jsonData);
     }
-    trialOrder = text;
     showInstructions();
 }
 
@@ -318,7 +314,7 @@ async function finishClosing() {
     const formData = new FormData(document.getElementById("closing").querySelector("form"));
     const jsonData = Object.fromEntries(formData.entries());
 
-    if (!debugMode) {
+    if (!isLocalHost) {
         await storeResponse(jsonData);
     }
     document.getElementById("closing").innerHTML = `

@@ -3,6 +3,10 @@
 const crypto = require('crypto');
 const fs = require('fs');
 
+// Note: This is currently hard-coded to a specific user folder
+// The files appear to be written by the user hosting the script
+const targetDir = "/s/chopin/b/grad/bdvision/badvisionKeyboard";
+
 let postData = "";
 let responseBuffer = "";
 const balancedLatinSquares = [
@@ -26,6 +30,12 @@ function println(data) {
     console.log(responseBuffer.length.toString(16) + "\r");
     console.log(responseBuffer + "\r");
     responseBuffer = "";
+}
+
+async function getTrialOrder() {
+    const files = await fs.readdir(targetDir);
+    const idx = files.length % balancedLatinSquares.length;
+    return balancedLatinSquares[idx];
 }
 
 function main(postData) {
@@ -69,7 +79,12 @@ function main(postData) {
         device: deviceDetails,
         request: requestDetails
     }
-    fs.appendFileSync(`/s/chopin/b/grad/bdvision/badvisionKeyboard/${userIp}_${userHash}.json`, JSON.stringify(dataLog));
+    fs.appendFileSync(`${targetDir}/${userIp}_${userHash}.json`, `${JSON.stringify(dataLog)},\n`);
+
+    // TODO: Figure out when it's the initial survey
+    if (true) {
+        println(getTrialOrder());
+    }
 
     // Needed to terminate the chunked stream
     println("");
