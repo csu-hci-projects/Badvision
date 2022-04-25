@@ -7,8 +7,8 @@ const layouts = {
     qwerty: {
         style: "rectangular",
         rows: [
-            "qwertyuiop-",
-            "asdfghjkl;!",
+            "qwertyuiop-!",
+            "asdfghjkl;'",
             "|zxcvbnm,.?",
             "||| "
         ],
@@ -18,7 +18,7 @@ const layouts = {
         rows: [
             "|bdlf-;",
             "caermq?",
-            "jhn oyz",
+            "jhn oyz'",
             "gitsuv!",
             "|kpwx,."
         ]
@@ -247,7 +247,7 @@ async function startTrials() {
     for (let i = 0; i < 4; i++) {
         trials[i] = trialVariables[trialOrder[i]];
         if (debugMode) {
-            trials[i].phrases = ["aaa", "bbb", "ccc", "ddd", "eee"];
+            trials[i].phrases = ["a'a", "b'b", "ccc", "ddd", "eee"];
         } else {
             trials[i].phrases = phraseIndexes.slice(i * 5, (i + 1) * 5).map(i => phrases[i]);
         }
