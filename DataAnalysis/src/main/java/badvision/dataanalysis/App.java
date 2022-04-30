@@ -7,9 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.image.Image;
 
 /**
- * JavaFX App
+ * JavaFX App launcher class responsible for bootstrapping and starting the main app controller
  */
 public class App extends Application {
 
@@ -18,6 +19,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 640, 480);
+        stage.setTitle("Badvision Keyboard Experiment Data Analyzer");
+        stage.getIcons().add(new Image("https://www.iconsdb.com/icons/download/white/keyboard-2-128.png"));
         stage.setScene(scene);
         stage.show();
     }
