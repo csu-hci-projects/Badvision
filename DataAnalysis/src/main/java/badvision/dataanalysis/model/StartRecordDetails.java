@@ -24,6 +24,7 @@ public class StartRecordDetails extends RequestDetails<StartRecordDetails.StartR
         private String impairment;
         @SerializedName("impairmentOther")
         private String impairmentOther;
+        private Integer ifreq;
     }
 
     @Override

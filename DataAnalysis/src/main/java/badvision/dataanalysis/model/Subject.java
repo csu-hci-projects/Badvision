@@ -44,6 +44,10 @@ public class Subject {
                 .collect(Collectors.toList());
     }
 
+    public int getRestartCount() {
+        return (int) (getRecordsOfType(StartRecord.class).count()-1);        
+    }
+    
     public Optional<StartRecord> getStartRecord() {
         return getRecordsOfType(StartRecord.class)
                 .reduce((a,b)->b);

@@ -8,5 +8,5 @@ module badvision.dataanalysis {
 
     opens badvision.dataanalysis to javafx.fxml;
     opens badvision.dataanalysis.model to com.google.gson, javafx.base;
-    exports badvision.dataanalysis;
+    exports badvision.dataanalysis;    
 }

@@ -36,6 +36,7 @@ public abstract class RecordedResponse<R extends RequestDetails> {
             try {
                 RecordedResponse rr = JsonUtil.parseStringAsClass(str, r.clazz);
                 if (rr.getRequest().isValidRecord()) {
+                    rr.setRecordType(r.name());
                     return Optional.of(rr);
                 }
             } catch (Exception e) {

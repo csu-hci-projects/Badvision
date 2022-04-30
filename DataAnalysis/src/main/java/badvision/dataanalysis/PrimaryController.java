@@ -1,23 +1,28 @@
 package badvision.dataanalysis;
 
-import badvision.dataanalysis.model.GeoInfo;
+import badvision.dataanalysis.model.RecordedResponse;
 import badvision.dataanalysis.model.Subject;
+import badvision.dataanalysis.util.ExportUtil;
 import badvision.dataanalysis.util.JsonUtil;
+import static badvision.dataanalysis.util.StringUtil.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.DirectoryChooser;
 
+/**
+ * Ties the JavaFX UI (described in the FXML file) to the rest of the application logic
+ * @author brobert
+ */
 public class PrimaryController {
-//    ArrayList<Subject> subjectList = new ArrayList<>();
-
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -28,7 +33,7 @@ public class PrimaryController {
     private TableView<Subject> subjectTable;
 
     @FXML
-    private TableView experimentTable;
+    private TableView<RecordedResponse> experimentTable;
 
     @FXML // fx:id="experimentEndColumn"
     private TableColumn<Subject, String> experimentEndColumn; // Value injected by FXMLLoader
@@ -52,25 +57,35 @@ public class PrimaryController {
     private TableColumn<Subject, Integer> numRecordsColumn; // Value injected by FXMLLoader
 
     @FXML // fx:id="recordTypeColumn"
-    private TableColumn<Subject, String> recordTypeColumn; // Value injected by FXMLLoader
+    private TableColumn<RecordedResponse, String> recordTypeColumn; // Value injected by FXMLLoader
 
     @FXML // fx:id="trialDateColumn"
-    private TableColumn<Subject, Calendar> trialDateColumn; // Value injected by FXMLLoader
+    private TableColumn<RecordedResponse, String> trialDateColumn; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="exportButton"
+    private Button exportButton; // Value injected by FXMLLoader
 
+    File currentDirectory;
+    
     @FXML
     void loadDataFiles(ActionEvent event) {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Pick folder with data");
-        File directory = chooser.showDialog(null);
-        if (directory == null) {
+        currentDirectory = chooser.showDialog(null);
+        if (currentDirectory == null) {
             return;
         }
         subjectTable.getItems().clear();
-        Arrays.stream(directory.listFiles((f)->f.getName().toLowerCase().endsWith(".json")))
+        Arrays.stream(currentDirectory.listFiles((f)->f.getName().toLowerCase().endsWith(".json")))
                 .flatMap(JsonUtil::loadDataFile).forEach(subjectTable.getItems()::add);
         System.out.println("Loaded "+subjectTable.getItems().size()+" subjects");
+        exportButton.setDisable(subjectTable.getItems().size()==0);
     }
     
+    @FXML
+    void saveReport(ActionEvent event) throws IOException {
+        ExportUtil.saveReport(currentDirectory, subjectTable.getItems());
+    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -83,6 +98,7 @@ public class PrimaryController {
         assert numRecordsColumn != null : "fx:id=\"numRecordsColumn\" was not injected: check your FXML file 'primary.fxml'.";
         assert recordTypeColumn != null : "fx:id=\"recordTypeColumn\" was not injected: check your FXML file 'primary.fxml'.";
         assert trialDateColumn != null : "fx:id=\"trialDateColumn\" was not injected: check your FXML file 'primary.fxml'.";
+        assert exportButton != null : "fx:id=\"exportButton\" was not injected: check your FXML file 'primary.fxml'.";
         experimentStartColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(formatDate(p.getValue().getStartTime())));
         experimentEndColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(formatDate(p.getValue().getEndTime())));
         fileColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue().getFilename()));
@@ -90,23 +106,9 @@ public class PrimaryController {
         locationColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(formatLocation(p.getValue().getLocation())));
         numRecordsColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue().getRecordCount()));        
         factorOrderColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue().getStartRecord().get().getRequest().getTrialOrder()));
+        subjectTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> experimentTable.getItems().setAll(newVal.getRecords()));
+        trialDateColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(formatDate(p.getValue().getRequest().getTime())));
+        recordTypeColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue().getRecordType()));
         
-    }
-
-    private String formatDate(Calendar cal) {
-        if (cal == null) {
-            return "";
-        } else {
-            return cal.toInstant().toString();
-        }
-    }
-    
-    private String formatLocation(GeoInfo geo) {
-        if (geo == null) {
-            return "";
-        } else {
-            return geo.getCity();
-        }
-    }
-    
+    }    
 }
