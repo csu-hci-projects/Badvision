@@ -14,13 +14,13 @@
       <Button mnemonicParsing="false" onAction="#loadDataFiles" text="Load data files" />
       <TableView fx:id="subjectTable">
         <columns>
-          <TableColumn fx:id="fileColumn" prefWidth="167.33331298828125" text="File" />
-          <TableColumn fx:id="ipColumn" prefWidth="118.0" text="IP" />
-            <TableColumn fx:id="locationColumn" minWidth="7.3333740234375" prefWidth="122.666748046875" text="Location" />
-            <TableColumn fx:id="numRecordsColumn" minWidth="0.0" prefWidth="62.666748046875" text="# Records" />
-            <TableColumn fx:id="experimentStartColumn" prefWidth="148.6666259765625" text="Start" />
-            <TableColumn fx:id="experimentEndColumn" prefWidth="119.3333740234375" text="End" />
-            <TableColumn fx:id="factorOrderColumn" prefWidth="105.3333740234375" text="Factor Order" />
+          <TableColumn fx:id="fileColumn" prefWidth="170" text="File" />
+          <TableColumn fx:id="ipColumn" prefWidth="120" text="IP" />
+            <TableColumn fx:id="locationColumn" minWidth="0" prefWidth="130" text="Location" />
+            <TableColumn fx:id="numRecordsColumn" minWidth="0.0" prefWidth="60" text="# Records" />
+            <TableColumn fx:id="experimentStartColumn" prefWidth="150" text="Start" />
+            <TableColumn fx:id="experimentEndColumn" prefWidth="150" text="End" />
+            <TableColumn fx:id="factorOrderColumn" prefWidth="100" text="Factor Order" />
         </columns>
       </TableView>
       <TableView fx:id="experimentTable" prefHeight="200.0" prefWidth="200.0">
