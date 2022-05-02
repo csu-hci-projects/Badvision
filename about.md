@@ -107,5 +107,6 @@ The data analysis tool uses the following libraries:
    - Apache Commons Math: Provides One-way ANOVA and other analysis functions for mean and standard deviation
    - Apache Oro: Provides the Excel file support for preparing a clean export ready to use
    - Java FX: Provides the GUI interface and binding of data to GUI
+   - JUnit: Some unit testing was written to assert a few json parsing operations but is not an extensive amount of code coverage by any means.  Most testing was performed manually with a debugger.
 
 The Data Analysis tool has main app classes in the base package `badvision.dataanalysis`, model beans in the `badvision.dataanalysis.model` package (some of which have their own summarization routines for WPM and accuracy calculation), and finally the heavier processing is in the utility classes for Anova analysis, Exporting to Excel, Determining geo location, and other string and JSON handling.  See the classes' java docs for additional information.
