@@ -4,6 +4,14 @@ This project aims to measure any change in typing speed or accuracy relevant to 
 
 For a more functional overview see [About.md](about.md)
 
+# Relevant links:
+
+   - [Summary Video](...) TODO: Short 3-minute explanation of project
+   - [Website](https://cs.colostate.edu/~bdvision): Contains some additional high-level description and a live demonstration of the experiment
+   - [Technical Documentation](https://github.com/csu-hci-projects/Badvision/blob/main/about.md): Description of the architecture, design, and coding details
+   - [Project demonstration](...): Demonstration of full project
+   - [Progress Report video](https://youtu.be/kpJdo-KhyiI): This shows the prototype in action and explains the experiment structure
+
 # Source repository structure
 
 This project is divided into separate modules:
