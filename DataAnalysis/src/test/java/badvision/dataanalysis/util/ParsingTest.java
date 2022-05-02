@@ -1,9 +1,11 @@
 package badvision.dataanalysis.util;
 
 import badvision.dataanalysis.model.DeviceDetails;
+import badvision.dataanalysis.model.Keystroke;
 import badvision.dataanalysis.model.RecordedResponse.StartRecord;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Some basic tests to ensure json parsing is working at some basic level.
@@ -49,5 +51,14 @@ public class ParsingTest {
                 + "\"trialOrder\":\"0132\"}},";
         StartRecord s = JsonUtil.parseStringAsClass(str, StartRecord.class);
         assertEquals("0132", s.getRequest().getTrialOrder());
+    }
+    
+    @Test
+    public void testKeystrokeParsing() {
+        String str = "{\"time\":\"2022-04-28T02:24:56.641Z\",\"key\":\"f\",\"type\":\"correct\"}";
+        Keystroke k = JsonUtil.parseStringAsClass(str, Keystroke.class);
+        assertEquals("f", k.getKey());
+        assertEquals(Keystroke.StrokeType.correct, k.getType());
+        assertNotNull(k.getTime());
     }
 }

@@ -7,3 +7,4 @@ Docs/*.out
 Docs/*.lyx
 Docs/*.fls
 Experiment/audio track.*
+/DataAnalysis/target/

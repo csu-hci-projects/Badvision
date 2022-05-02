@@ -5,6 +5,7 @@ module badvision.dataanalysis {
     requires com.google.gson;
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
+    requires commons.math3;
 
     opens badvision.dataanalysis to javafx.fxml;
     opens badvision.dataanalysis.model to com.google.gson, javafx.base;

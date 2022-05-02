@@ -61,6 +61,8 @@ public class JsonUtil {
         return GSON.fromJson(reader, clazz);
     }
     
+    static int completeCount = 0;
+    static int incompleteCount = 0;
     public static Stream<Subject> loadDataFile(File dataFile) {
         List<Subject> subjects = new ArrayList<>();
         try {
@@ -73,11 +75,21 @@ public class JsonUtil {
                     s.getRecords().add(r.get());
                     if (r.get() instanceof RecordedResponse.EndRecord) {
                         subjects.add(s);
+                        if (s.isComplete()) {
+                            s.setNumber(++completeCount);
+                        } else {
+                            s.setNumber(++incompleteCount+1000);
+                        }
                         s = new Subject();
                     }                    
                 }
             }
             if (s.getRecordCount() > 0) {
+                if (s.isComplete()) {
+                    s.setNumber(++completeCount);
+                } else {
+                    s.setNumber(++incompleteCount+1000);
+                }
                 subjects.add(s);
             }
             subjects.forEach(subject -> {

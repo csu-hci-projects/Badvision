@@ -17,6 +17,7 @@ import lombok.Data;
  */
 @Data
 public class Subject {
+    private int number;
     private String filename;
     private String ip;
     private GeoInfo location;
@@ -43,6 +44,11 @@ public class Subject {
         return getRecordsOfType(TrialRecord.class)
                 .collect(Collectors.toList());
     }
+    
+    public String getTrialOrder() {
+        StartRecord s = getStartRecord().orElseThrow();
+        return s.getRequest().getTrialOrder();
+    }
 
     public int getRestartCount() {
         return (int) (getRecordsOfType(StartRecord.class).count()-1);        
@@ -56,5 +62,24 @@ public class Subject {
     public Optional<EndRecord> getEndRecord() {
         return getRecordsOfType(EndRecord.class)
                 .reduce((a,b)->b);
+    }
+
+    public void performSubjectAnalysis() {
+        if (isComplete()) {
+            getTrialRecords().forEach((TrialRecord r) -> r.getRequest().getBody().performTrialAnalysis());            
+        }
+    }
+    
+    public Optional<TrialRecord> getTrialRecord(int trial) {
+        if (!isComplete()) {
+            return Optional.empty();
+        }
+        String s = String.valueOf(trial);
+        int idx = getTrialOrder().indexOf(s);
+        return Optional.of(getTrialRecords().get(idx));
+    }
+    
+    public boolean isComplete() {
+        return getTrialRecords().size() == 4;
     }
 }

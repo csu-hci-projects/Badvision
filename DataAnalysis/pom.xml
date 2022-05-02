@@ -48,6 +48,11 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -115,4 +120,11 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>apache</id>
+            <name>apache_snapshots</name>
+            <url>http://repository.apache.org/snapshots</url>
+        </repository>
+    </repositories>
 </project>
