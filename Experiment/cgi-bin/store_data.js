@@ -82,10 +82,11 @@ async function main(postData) {
     }
 
     const dataLog = {
-        device: deviceDetails,
-        request: requestDetails
-    }
-    fs.appendFileSync(`${targetDir}/${userIp}_${userHash}.json`, `${JSON.stringify(dataLog)},\n`);
+            device: deviceDetails,
+            request: requestDetails
+        }
+        // Note: Deactivated data saving since experiment is over.
+        //    fs.appendFileSync(`${targetDir}/${userIp}_${userHash}.json`, `${JSON.stringify(dataLog)},\n`);
 
     // Needed to terminate the chunked stream
     println("");

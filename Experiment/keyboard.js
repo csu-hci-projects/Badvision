@@ -1,6 +1,11 @@
 const click = new Audio("click.wav");
-let isLocalHost = !location.host;
-let debugMode = isLocalHost;
+//let isLocalHost = !location.host;
+//let debugMode = isLocalHost;
+// Note: We are hard-coding "isLocalHost" so that actual server calls to save
+// data do not occur.  If you want to re-run this experiment remove the next
+// two lines and uncomment the above two lines.
+let isLocalHost = true;
+let debugMode = false;
 
 // pipe is treated as a spacer (not a visible key)
 const layouts = {
