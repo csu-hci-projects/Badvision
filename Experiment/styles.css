@@ -202,3 +202,9 @@ input[type='button'] {
     color: #fe8;
     border-radius: 5px;
 }
+
+a,
+a:visited {
+    color: #fe8;
+    font-weight: bold;
+}
