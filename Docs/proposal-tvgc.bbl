@@ -1,0 +1,55 @@
+\begin{thebibliography}{1}
+
+\bibitem{alhabri19}
+{Alharbi, Ohoud and Arif, Ahmed Sabbir and Stuerzlinger, Wolfgang and Dunlop,
+  Mark D. and Komninos, Andreas}.
+\newblock {WiseType: A Tablet Keyboard with Color-Coded Visualization and
+  Various Editing Options for Error Correction}.
+\newblock In {\em {Proceedings of Graphics Interface}}, {2019}.
+
+\bibitem{chaparro13}
+{Chaparro, B. S., Phan, M. and Jardina, J. R.}
+\newblock {Usability and performance of tablet keyboards: Microsoft Surface vs.
+  Apple iPad}.
+\newblock In {\em {Proceedings of the Human Factors and Ergonomics Society
+  International Annual Meeting}}, volume~{57}, pages {1328--1332}. {SAGE
+  Publications}, {2013}.
+
+\bibitem{darragh90}
+{Darragh, J.J and Witten, I.H. and James, M. L. }.
+\newblock {The Reactive Keyboard: a predictive typing aid}.
+\newblock {\em {Computer}}, {21}({11}):{41--49}, {Nov} {1990}.
+
+\bibitem{darragh88}
+{Darragj, John Joseph}.
+\newblock {\em {Adaptive predictive text generation and the reactive
+  keyboard}}.
+\newblock PhD thesis, {University of Calgary}, {1988}.
+
+\bibitem{Jain11}
+{Jain, Siddharth and Bhattacharya, Samit}.
+\newblock {Predictive error behavior model of on-screen keyboard users}.
+\newblock In {\em {Extended Abstracts on Human Factors in Computing Systems}},
+  {CHI '11}, pages {1435--1440}, {May} {2011}.
+
+\bibitem{Sono19}
+{Sono, Chikako and Hasegawa, Tatsuhito}.
+\newblock {Interaction to Support the Learning of Typing for Beginners on
+  Physical Keyboard by Projection Mapping}.
+\newblock In {\em {Proceedings}}, {ICIT 2019}, {2019}.
+
+\bibitem{Zhai00}
+{Zhai, Shumin and Hunter, Michael and Smith, Barton}.
+\newblock {The Metropolis Keyboard -- An exploration of Quantitative Techniques
+  for Virtual Keyboard Design}.
+\newblock In {\em {Proceedings of the 13th Annual symposium on User interface
+  software and technology}}, pages {119--128}, {Mar} {2000}.
+
+\bibitem{Zhai01}
+{Zhai, Shumin and Smith, Barton}.
+\newblock {Alphabetically biased virtual keyboards are easier to use: layout
+  does matter}.
+\newblock In {\em {Extended Abstracts on Human Factors in Computing Systems}},
+  {CHI '01}, pages {231--222}, {Mar} {2001}.
+
+\end{thebibliography}
