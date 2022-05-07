@@ -6,7 +6,7 @@ For a more functional overview see [About.md](about.md)
 
 # Relevant links:
 
-   - [Summary Video](...) TODO: Short 3-minute explanation of project
+   - [Summary Video](https://www.youtube.com/watch?v=QbgB-r6luGA)
    - [Website](https://cs.colostate.edu/~bdvision): Contains some additional high-level description and a live demonstration of the experiment
    - [Technical Documentation](https://github.com/csu-hci-projects/Badvision/blob/main/about.md): Description of the architecture, design, and coding details
    - [Project demonstration](...): Demonstration of full project
