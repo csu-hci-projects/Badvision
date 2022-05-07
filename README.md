@@ -6,10 +6,11 @@ For a more functional overview see [About.md](about.md)
 
 # Relevant links:
 
-   - [Summary Video](https://www.youtube.com/watch?v=QbgB-r6luGA)
+   - [Summary Video](https://www.youtube.com/watch?v=QbgB-r6luGA) ([Download](https://cs.colostate.edu/~bdvision/short-presentation.mp4))
+   - [Longer Project Presentation](https://www.youtube.com/watch?v=0Zkmo593qnc) ([Download](https://cs.colostate.edu/~bdvision/long-presentation.mp4))
    - [Website](https://cs.colostate.edu/~bdvision): Contains some additional high-level description and a live demonstration of the experiment
    - [Technical Documentation](https://github.com/csu-hci-projects/Badvision/blob/main/about.md): Description of the architecture, design, and coding details
-   - [Project demonstration](...): Demonstration of full project
+   - [Project demonstration](https://cs.colostate.edu/~bdvision): Live demonstration of full project
    - [Progress Report video](https://youtu.be/kpJdo-KhyiI): This shows the prototype in action and explains the experiment structure
 
 # Source repository structure
