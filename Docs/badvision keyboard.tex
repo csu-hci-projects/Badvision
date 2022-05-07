@@ -104,14 +104,15 @@ on a touchscreen such as an iPad or a Surface laptop. However, there
 is potential to optimize for smaller screen sizes but that will not
 be considered as part of this study.
 
-\section{Background}
+The goal of this experiment is to measure the performance of a novel optimized keyboard layout against a familiar QWERTY layout, and to examine if offering spelling suggestions improves performance as well.
+
+\section{Related Works}
 
 \subsection{Reactive Keyboard}
 Predictive keyboard features, aka Predictive Text Generation was researched
 as early as 1988 by John Darragh \cite{darragh88}. His PhD dissertation
 proposes an early model for auto-correction named \textquotedblleft The
-Reactive Keyboard\textquotedblright{} (shown in figure \ref{fig:reactive_keyboard}) which to
-a good degree also serves a fair empirical study of the area of predictive
+Reactive Keyboard\textquotedblright{} (shown in figure \ref{fig:reactive_keyboard}) which to a good degree also serves a fair empirical study of the area of predictive
 text dating back even further to early work by Dennis Ritchie and
 Ken Thompson in the form of the UNIX Predict keyboard utility. The
 Reactive Keyboard thesis goes into great length to examine various
@@ -129,9 +130,11 @@ in a practical sense the authors note that users with disabilities
 such as cerebral palsy reported they felt predictive typing aids were
 strongly beneficial. It is worthy of mention this effect is a major
 consideration and inspiration to continue examining input methods
-to help the disabled! 
+to help the disabled!
 
-\begin{figure}
+This early research demonstrates the benefit of typing suggestions to improve efficiency and inspires the independent variable to show keyboard hints in this experiment.
+
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=0.95\columnwidth]{\string"reactive keyboard\string".png}
   \caption{The Reactive Keyboard \cite{darragh90}}
@@ -151,7 +154,9 @@ keys, like modern keyboard overlays on modern smart phones. Also like
 some modern touchscreen keyboards, WiseType also auto-corrects words
 in some cases.
 
-\begin{figure}
+In this research prototype, the fault-tolerant input features are inspired by WiseType.
+
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=0.95\columnwidth]{WiseType}
   \caption{WiseType Keyboard \cite{alhabri19}}
@@ -168,7 +173,9 @@ speed and error, also time to press the first key was measured as
 well. They also provided survey results to gauge how confident users
 felt about their typing before and after. 
 
-\begin{figure}
+Combined with the Reactive Keyboard mentioned earlier, these two combined influenced the idea of showing projected hints on the keys based on spelling suggestions.
+
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=0.95\columnwidth]{\string"Overlay Projection\string".png}
   \caption{Sono/Hasegawa Overlay Projection \cite{Sono19}}
@@ -185,7 +192,7 @@ Smith designed a keyboard layout (figure \ref{fig:metropolis}) quantitatively us
 Metropolis random walk algorithm to produce a layout capable of up to 43.1
 WPM performance after training. \cite{Zhai00}
 
-\begin{figure}
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=0.95\columnwidth]{Metropolis}
   \caption{Metropolis Keyboard (unweighted layout) \cite{Zhai00}}
@@ -195,47 +202,49 @@ WPM performance after training. \cite{Zhai00}
 Though promising, this was further improved by Zhai and Smith one
 year later \cite{Zhai01} by weighting the alphabetical ordering of
 the letters, helping novice users locate keys more quickly up to
-9\% improvement over the previous Metropolis keyboard. (9.7 WPM vs 8.9 WPM.) The weighted
-layout, shown in figure \ref{fig:metropolis_weighted}, is the layout which will be used in the
-experiment alongside a traditional QWERTY layout.  Expert performance was reported measuring up to 41.8 WPM.
+9\% improvement over the previous Metropolis keyboard. (9.7 WPM vs 8.9 WPM.) The weighted layout, shown in figure \ref{fig:metropolis_weighted}, is the layout which will be used in the experiment alongside a traditional QWERTY layout.  Expert performance was reported measuring up to 41.8 WPM.
 
-\begin{figure}
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=0.95\columnwidth]{\string"metropolis keyboard weighted\string".png}
   \caption{Metropolis Keyboard weights biased on alphabetical ordering \cite{Zhai01}}
   \label{fig:metropolis_weighted}
 \end{figure}
 
+\section{Questions/Hypothesis}
+
+With this experiment there are a set of hypothesis and questions to test:
+
+\begin{itemize}
+\item Is it possible to reproduce the work of Zhai-Smith?
+\item With predictive highlighting users should have an easier time learning 
+the new keyboard layout, measurable by improved accuracy and WPM speed?  Better still,
+is there sufficient evidence to show improved learning on the novel layout?
+\item Will there be enough self-reporting subjects with disabilities,
+such that additional benefits to those users can be examined?  This project is not 
+specifically studying the effects of this technology on that part of the population 
+but having additional options for folks with disabilities can only be a net positive result.
+\end{itemize}
 
 \section{Methodology}
 
 \subsection{Subject Selection}
 
-This experiment is hosted on a website, allowing for a geographically-distributed subject pool.  
-The only requirement for participants is that they have access to some kind of touchscreen 
-tablet device such as an iPad, Surface or Chrome book. Similar studies have roughly a half 
-dozen subjects, with trials taking as long  as 45 minutes. To avoid environmental issues 
-(see section on extraneous and  confounding variables) the trial duration should be reduced to
-10-15 minute intervals, such that participants can take breaks between trial conditions as 
-needed.  This should reduce probability of distraction during the test. Also, longer 
-tests with no breaks complicate locating willing volunteers so this solves two problems.
+This experiment is hosted on a website, allowing for a geographically-distributed subject pool. The only requirement for participants is that they have access to some kind of touchscreen tablet device such as an iPad, Surface or Chrome book. Similar studies have roughly a half dozen subjects, with trials taking as long  as 45 minutes. To avoid environmental issues (see section on extraneous and  confounding variables) the trial duration should be reduced to 10-15 minute intervals, such that participants can take breaks between trial conditions as needed.  This should reduce probability of distraction during the test. Also, longer tests with no breaks complicate locating willing volunteers so this solves two problems.
 With the number of samples per subjects reduced, a data set comparable
 to similar studies can be obtained by increasing the desired subject
 pool to approximately 20 subjects if possible.
 
 \subsection{Software Test Apparatus}
 
-The application flow is summarized in a sequence diagram shown in figure \ref{fig:sequence}.
-Again, the software test apparatus is a hosted website. The participant is
-identified by a combination of their IP address and any latent tracking
+The application flow is summarized in a sequence diagram shown in figure \ref{fig:sequence}. Again, the software test apparatus is a hosted website. The participant is identified by a combination of their IP address and any latent tracking
 cookies already stored in their browser.  That way if the user has to leave
 or retry the experiment altogether it can be further examined.
 When they first arrive, they are presented with a small page of 
 instructions explaining the test.
 
 The participant advances from the first screen by providing optional details 
-about themselves such their age range, and if they have any physical conditions, injuries
-that affect their ability to use computers normally.
+about themselves such their age range, and if they have any physical conditions, injuries that affect their ability to use computers normally.
 
 Prior to the first trial a more detailed set of instructions is provided
 with a visual demonstration of the keyboard in use. The participant is also
@@ -249,9 +258,7 @@ the top of the screen and will be asked to type what they read on the screen.
 As they type their response will be shown below the provided text. As correct
 letters are typed, the letters in the prompt text are darkened. Incorrect letters
 will appear in the typed response but will not advance the progress indication
-in the above prompt text.  If they omit one letter and type the next letter proceeding it
-then the indicator will act as if they had typed both letters, even though their response
-will show they did not actually type it.  The goal is to have a somewhat
+in the above prompt text.  If they omit one letter and type the next letter proceeding it then the indicator will act as if they had typed both letters, even though their response will show they did not actually type it.  The goal is to have a somewhat
 fault-tolerant input that does not require the user to correct mistakes so
 that they can stay focused on pressing the next keys in sequence, otherwise
 measuring typing performance and accounting for user corrections adds
@@ -262,13 +269,10 @@ Explored further in the later section on confounding
 variables, consistency of physical size of the keyboard layout is
 important. For example. a relatively common keyboard such as Logitech K830 
 has keys laid out in a 26cm x 10cm arrangement, allowing a compact but usable format. 
-In comparison, A Microsoft surface
-14\textquotedblright{} laptop has physical view area dimensions larger
-than that (28.5cm x 18.5cm), and an iPad Pro has (30.5cm x 22cm).
-Ideally the keyboard should vary too much because it could otherwise interfere with
+In comparison, A Microsoft surface 14\textquotedblright{} laptop has physical view area dimensions larger than that (28.5cm x 18.5cm), and an iPad Pro has (30.5cm x 22cm). Ideally the keyboard should vary too much because it could otherwise interfere with
 the learned behavior of subjects all of whom are familiar with QWERTY by now.
 
-\begin{figure}
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=1.1\columnwidth]{Sequence-light.png}
   \caption{Software apparatus sequence diagram.}
@@ -287,7 +291,7 @@ Ultimately the ideal apparatus being tested is in Trial D, and the
 other trials will seek to identify if the independent variables in
 that apparatus have any statistical significance in the data observed.
 
-\begin{table}[tbp]
+\begin{table}[!htb]
   \centering
   \begin{tabular}{@{}llll@{}}
   \toprule
@@ -420,21 +424,6 @@ of the other independent variable at a time.  For example, with hints enabled
 between the two keyboard layouts.  This is repeated for both WPM and for
 accuracy.
 
-\section{Questions/Hypothesis}
-
-With this experiment there are a set of hypothesis and questions to test:
-
-\begin{itemize}
-\item For Trial 1 "Zhai/Smith" (metropolis keyboard with no suggestions), will
-subjects achieve the WPM speeds comparable to 9.7 WPM? 
-\item With predictive highlighting users should have an easier time learning 
-the new keyboard layout, measurable by improved accuracy and WPM speed.  Will any come closer to the ~40 WPM expert performance from Zhai-Smith with hints?
-\item Will there be enough self-reporting subjects with disabilities,
-such that additional benefits to those users can be examined?  This project is not 
-specifically studying the effects of this technology on that part of the population 
-but having additional options for folks with disabilities can only be a net positive result.
-\end{itemize}
-
 \section{Results}
 \subsection{Subject summary}
 Overall, 36 subjects started the experiment but only 18 completed it.  This is close to the
@@ -443,45 +432,22 @@ goal of about 20 subjects, so the incomplete subject data was culled.
 Only two subjects reported any kind of impairment that affects typing, so there
 was insufficient data to examine those factors.
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.95\columnwidth]{subject-age.png}
-  \caption{Subjects' ages range from 20 to 80}
-  \label{fig:age}
-\end{figure}
 Subjects' ages range from 20 to 80 shown in figure \ref{fig:age}. Half of subjects (6) are between 20 and 24. The rest range equally spread between 40 and 80 years. 
 The low sampling value of ages means that finding a correlation between age and typing performance is not
 directly possible.
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.95\columnwidth]{subject-location.png}
-  \caption{Subjects' location}
-  \label{fig:location}
-\end{figure}
-Subjects' location is shown in figure \ref{fig:location}. One third of subjects are in Ft. Collins.
-The rest are from other cities such as Burbank, Des Moines, Newark, and so on.  Other subjects
-that did not complete the experiment live as far away as India but are not included in this analysis.
+Subjects' location is shown in figure \ref{fig:location}. One third of subjects are in Ft. Collins. The rest are from other cities such as Burbank, Des Moines, Newark, and so on.  Other subjects that did not complete the experiment live as far away as India but are not included in this analysis.
 
-One half of subjects used an iPad, with Windows devices reporting for one third total as well.
-Windows users were split 50-50 between Microsoft Surface and other unspecified convertible or hybrid touchscreen
-laptops.  Finally, one sixth of subjects use android-based devices, most likely chrome books based on the detected
+One half of subjects used an iPad, with Windows devices reporting for one third total as well. Windows users were split 50-50 between Microsoft Surface and other unspecified convertible or hybrid touchscreen laptops.  Finally, one sixth of subjects use android-based devices, most likely chrome books based on the detected
 user agent string sent by their browsers.
 
-Finally, the last random variable examined is the position of the tablet device relative to the user. Close to half
-of subjects reported the device sits on the table in front of them.  Another two thirds have the device resting in
-their laps.  A smaller number of users are holding the device in-hand (2 total) and finally one subject reports the
-tablet is sitting to their side, such as on the arm of a sofa.
+Finally, the last random variable examined is the position of the tablet device relative to the user. Close to half of subjects reported the device sits on the table in front of them.  Another two thirds have the device resting in their laps.  A smaller number of users are holding the device in-hand (2 total) and finally one subject reports the tablet is sitting to their side, such as on the arm of a sofa.
 
-Overall, the variety among these random variables adds to the externality validity of this experiment but can arguably
-be reasonably considered as threats to internal validity (except for location).  This is discussed later.
+Overall, the variety among these random variables adds to the externality validity of this experiment but can arguably be reasonably considered as threats to internal validity (except for location).  This is discussed later.
 
 \subsection{Speed comparison}
-Even though the graph is not normalized to any fixed line, it is clear in the raw data that a correlation exists
-between the subject typing speed and the keyboard layout. Furthermore, although subjects using QWERTY type faster,
-there is also a much higher degree of variance in the observed standard deviation as well.  On the other side, the
-Metropolis keyboard use shows much lower speeds with much lower variance overall as well. Between the Metropolis keyboard
-trials with and without hints, the trials with hints very consistently have higher WPM scores with a lower variance as well.
+Even though the graph is not normalized to any fixed line, it is clear in the raw data that a correlation exists between the subject typing speed and the keyboard layout. Furthermore, although subjects using QWERTY type faster, there is also a much higher degree of variance in the observed standard deviation as well.  On the other side, the
+Metropolis keyboard use shows much lower speeds with much lower variance overall as well. Between the Metropolis keyboard trials with and without hints, the trials with hints very consistently have higher WPM scores with a lower variance as well.
 
 These are analyzed further in the ANOVA subsection.
 
@@ -492,12 +458,7 @@ These are analyzed further in the ANOVA subsection.
   \label{fig:wpm}
 \end{figure}
 
-Another analysis is shown in figure \ref{fig:keytime} based on the time between correct key strokes.
-For this calculation, incorrect keys are ignored and therefore is a measure only for successful seek
-times as an average of all keys during a trial.  For the most part this graph is, as expected, an
-inversion of the WPM graph, except it shows the separation between hints and no hints for Metropolis
-more clearly: with hints, users were much able to locate the correct keys much more quickly, but not
-nearly as quickly as QWERTY in any case.
+Another analysis is shown in figure \ref{fig:keytime} based on the time between correct key strokes. For this calculation, incorrect keys are ignored and therefore is a measure only for successful seek times as an average of all keys during a trial.  For the most part this graph is, as expected, an inversion of the WPM graph, except it shows the separation between hints and no hints for Metropolis more clearly: with hints, users were much able to locate the correct keys much more quickly, but not nearly as quickly as QWERTY in any case.
 
 \begin{figure}
   \centering
@@ -508,14 +469,8 @@ nearly as quickly as QWERTY in any case.
 
 \subsection{Accuracy comparison}
 
-Accuracy analysis allows a different story of the user experience.  This measure is calculated based on the
-total number of keys expected in a prompt minus the number of incorrect or skipped keystrokes. This is not
-the same number as correct keystrokes (though similar) but rather is the number of non-errored keystrokes.
-This number is divided by the total number of expected keystrokes to get a percentage of correct keys in the
-range of 0 (completely incorrect) to 1 (zero mistakes.)  One subject of the 18 was observed to have zero mistakes
-overall in all trials.  Otherwise, the majority of uses show much lower accuracy for QWERTY (between 65\% and 95\% accuracy)
-whereas the range of Metropolis performance is much greater (between 90\% and 98\%.), save one outlier
-who had the lowest accuracy overall (\~60\%) with a high standard deviation also observed in that same trial.
+Accuracy analysis allows a different story of the user experience.  This measure is calculated based on the total number of keys expected in a prompt minus the number of incorrect or skipped keystrokes. This is not the same number as correct keystrokes (though similar) but rather is the number of non-errored keystrokes. This number is divided by the total number of expected keystrokes to get a percentage of correct keys in the range of 0 (completely incorrect) to 1 (zero mistakes.)  One subject of the 18 was observed to have zero mistakes overall in all trials.  Otherwise, the majority of uses show much lower accuracy for QWERTY (between 65\% and 95\% accuracy)
+whereas the range of Metropolis performance is much greater (between 90\% and 98\%.), save one outlier who had the lowest accuracy overall (\~60\%) with a high standard deviation also observed in that same trial.
 
 \begin{figure}
   \centering
@@ -526,9 +481,7 @@ who had the lowest accuracy overall (\~60\%) with a high standard deviation also
 
 \subsection{ANOVA Analysis}
 
-Between the various trials and measures observed, a series of ANOVA one-way analysis are provided in table \ref{table:anova}. All comparisons are against two levels for 18 subjects.
-Of all comparisons reviewed, 9 were shown to be significant (\emph{p} < 0.05). 2 comparisons are related to hints
-when using the Metro layout, and the other 7 relationships deal with the difference between the two layouts in general.
+Between the various trials and measures observed, a series of ANOVA one-way analysis are provided in table \ref{table:anova}. All comparisons are against two levels for 18 subjects. Of all comparisons reviewed, 9 were shown to be significant (\emph{p} < 0.05). 2 comparisons are related to hints when using the Metro layout, and the other 7 relationships deal with the difference between the two layouts in general.
 These findings are summarized in the conclusion section.
 
 \begin{table*}[]
@@ -554,75 +507,43 @@ These findings are summarized in the conclusion section.
 
 \section{Threats to validity}
 \subsection{High external validity, lower internal validity}
-Given the many combinations of random variables (age, device, position), there is a good argument for the
-external validity of this experiment.  However, because the orientation of device variances as well as 
-the variety of device sizes, it is not as easy to make the same argument for the internal validity at the
-same time based on these variables.
+Given the many combinations of random variables (age, device, position), there is a good argument for the external validity of this experiment.  However, because the orientation of device variances as well as the variety of device sizes, it is not as easy to make the same argument for the internal validity at the same time based on these variables.
 
-However, the apparatus times responses down to the millisecond and therefore data precision is very high.
-Also, the trials are shuffled in a balanced Latin squares order, which clearly removes learning effects
-from the results: Consistently the hints are shown to improve performance of Metropolis keyboard use regardless
-if the keyboard shows hints the first or second time for the user of that layout. Finally, the subject is
-allowed to take breaks between trials and ensure their environment is quiet and distraction-free, which helps
-eliminate other random variables not recorded about their surrounding environment. These controls provide
-some better internal validity overall.
+However, the apparatus times responses down to the millisecond and therefore data precision is very high. Also, the trials are shuffled in a balanced Latin squares order, which clearly removes learning effects from the results: Consistently the hints are shown to improve performance of Metropolis keyboard use regardless if the keyboard shows hints the first or second time for the user of that layout. Finally, the subject is allowed to take breaks between trials and ensure their environment is quiet and distraction-free, which helps eliminate other random variables not recorded about their surrounding environment. These controls provide some better internal validity overall.
 \subsection{User difficulty during trials}
-A small number of users had prompts which required two of the same keys in a row to be pressed.
-Unfortunately, a bug in the apparatus was not anticipated or caught: iPad has a zoom feature activated
-by double-tapping on the screen.  Other issues such as server response errors were mitigated ahead of time
-with protective coding; if a server error returned instead of recording data the client would retry a few times.
-There was no significant impact on overall data collection because the prompts were relatively long enough,
-but this could have limited the maximum potential of users if they were capable of normally typing faster than 50 WPM.
-Because the experiment had a 50\% drop-out rate, it would probably have done better to start with pilot experiment
+A small number of users had prompts which required two of the same keys in a row to be pressed. Unfortunately, a bug in the apparatus was not anticipated or caught: iPad has a zoom feature activated by double-tapping on the screen.  Other issues such as server response errors were mitigated ahead of time with protective coding; if a server error returned instead of recording data the client would retry a few times.
+
+There was no significant impact on overall data collection because the prompts were relatively long enough, but this could have limited the maximum potential of users if they were capable of normally typing faster than 50 WPM. Because the experiment had a 50\% drop-out rate, it would probably have done better to start with pilot experiment
 that includes the various devices expected in the trial.
 \section{Results}
 
-The experiment overall succeeded in collecting results to answer two of the three initial research questions and
-yield some additional unexpected discoveries as well.
+The experiment overall succeeded in collecting results to answer two of the three initial research questions and yield some additional unexpected discoveries as well.
 
 \subsection{Attainability of Zhai/Smith results}
 
-The Zhai/Smith experiment with the Metropolis keyboard reported over 40 WPM for expert users and 9.7 WPM for novice users.
-However, even after roughly 30 minutes there was no sign of statistical deviation: users were only able to achieve a
-mean score of 8.3 WPM which is slightly less than the Zhai/Smith results but within its range of standard deviation.  
+The Zhai/Smith experiment with the Metropolis keyboard reported over 40 WPM for expert users and 9.7 WPM for novice users. However, even after roughly 30 minutes there was no sign of statistical deviation: users were only able to achieve a mean score of 8.3 WPM which is slightly less than the Zhai/Smith results but within its range of standard deviation.  
 
-Even with a second improved trial offering hints to allow users to locate keys faster, speeds only improved to a mean of 10 WPM.  
-There is no sign of learned improvement between the two Metropolis trials.  Subjects were exposed to the two variations of hints/no hints in a
-randomly assigned order, and over the ~30 minutes of usage there was no significant evidence of improvement due to usage.
-The mean performance from the original Zhai-Smith experiment was reproducible but the trial was not long enough to reproduce the reported expert performance from the same experiment.
+Even with a second improved trial offering hints to allow users to locate keys faster, speeds only improved to a mean of 10 WPM.  There is no sign of learned improvement between the two Metropolis trials.  Subjects were exposed to the two variations of hints/no hints in a randomly assigned order, and over the ~30 minutes of usage there was no significant evidence of improvement due to usage. The mean performance from the original Zhai-Smith experiment was reproducible but the trial was not long enough to reproduce the reported expert performance from the same experiment.
 
-It is possible to perform an extended trial where users commit to a much longer training period,
-but clearly it will be a period of time measured in hours if not days.
+It is possible to perform an extended trial where users commit to a much longer training period, but clearly it will be a period of time measured in hours if not days.
 
 \subsection{Comparison of hints on Metropolis keyboard}
 
-With the Metropolis layout, there was no immediate evidence of training improvement when users saw hints first or no hints first. Instead,
-there is a statistically significant correlation $(\emph{F}_{1,17} = 6.53, \emph{ p}<.05)$ that hints improve
-user performance by 1.7 WPM on the average (8.3 WPM without hints, 10.0 WPM with hints), and also that time-per-key is on average 367ms less with hints compared
-to no hints $(\emph{F}_{1,17} = 9.18, \emph{ p}<.005)$.  Therefore this hypothesis regarding hints improving performance is supported, but only in the specific case of the Metropolis keyboard layout.  QWERTY performance saw no statistically relevant change.
+With the Metropolis layout, there was no immediate evidence of training improvement when users saw hints first or no hints first. Instead, there is a statistically significant correlation $(\emph{F}_{1,17} = 6.53, \emph{ p}<.05)$ that hints improve user performance by 1.7 WPM on the average (8.3 WPM without hints, 10.0 WPM with hints) and also that time-per-key is on average 367ms less with hints compared to no hints $(\emph{F}_{1,17} = 9.18, \emph{ p}<.005)$.  Therefore this hypothesis regarding hints improving performance is supported, but only in the specific case of the Metropolis keyboard layout.  QWERTY performance saw no statistically relevant change.
 
 \subsection{Benefit for users with disabilities}
 
-There was only one self-reporting subject in the experiment pool reporting that they have a condition that impedes
-typing with any regularity.  The one subject reported having cerebral palsy.
-In additional feedback comments the user noted they were happy to use a keyboard that allowed them to type with one hand, which
-in the case of Metropolis it is optimized for one-handed use.  However promising, there was not enough data to support
-the usefulness or benefits to disabled users, and it merits further study with a larger selected pool of subjects.
+There was only one self-reporting subject in the experiment pool reporting that they have a condition that impedes typing with any regularity.  The one subject reported having cerebral palsy. In additional feedback comments the user noted they were happy to use a keyboard that allowed them to type with one hand, which in the case of Metropolis it is optimized for one-handed use.  However promising, there was not enough data to support the usefulness or benefits to disabled users, and it merits further study with a larger selected pool of subjects.
 
 \subsection{Other observations and findings}
 
-Despite the improvement that the hints provide Metropolis keyboard users, there was no conclusive support that there was a
-similar benefit for QWERTY users when comparing mean WPM measurements $(\emph{F}_{1,17} = .30, \emph{ p}=.58)$.  However,
-there were statistically significant changes in accuracy between the QWERTY and Metropolis layout $(\emph{F}_{1,17} = 8.13, \emph{ p}<0.01)$.
-In fact as a whole, accuracy of QWERTY was on average 92\% with hints, and 97\% (with very little deviation too) for Metropolis.
+Despite the improvement that the hints provide Metropolis keyboard users, there was no conclusive support that there was a similar benefit for QWERTY users when comparing mean WPM measurements $(\emph{F}_{1,17} = .30, \emph{ p}=.58)$.  However, there were statistically significant changes in accuracy between the QWERTY and Metropolis layout $(\emph{F}_{1,17} = 8.13, \emph{ p}<0.01)$. In fact as a whole, accuracy of QWERTY was on average 92\% with hints, and 97\% (with very little deviation too) for Metropolis.
 
-With no hints, there was a much narrow margin between the keyboard layouts (92\% again for QWERTY, and 94\% for Metropolis.)
-In this last comparison there was no statistical significance to account for the means due to variance observed. $(\emph{F}_{1,17} = .74, \emph{ p}=.39)$ 
+With no hints, there was a much narrow margin between the keyboard layouts (92\% again for QWERTY, and 94\% for Metropolis.) In this last comparison there was no statistical significance to account for the means due to variance observed. $(\emph{F}_{1,17} = .74, \emph{ p}=.39)$ 
 
 Overall, it was a surprising result to find Metropolis reporting a higher accuracy on average than QWERTY.
 
-In general subjects reporting that they liked the Metropolis keyboard were also much more likely to express interest in 
-a physical version of the keyboard (figure \ref{fig:interest}), though no subject reported a strong like or interest, and overall
+In general subjects reporting that they liked the Metropolis keyboard were also much more likely to express interest in a physical version of the keyboard (figure \ref{fig:interest}), though no subject reported a strong like or interest, and overall
 most repponses to these questions were somewhat more negative or neutral than they were positive or enthusiastic.
 
 \begin{figure}
@@ -636,16 +557,30 @@ most repponses to these questions were somewhat more negative or neutral than th
 \section{Further exploration}
 Although the Zhai-Smith expert results were not repeated successfully, the speed-per-key metric over time was not closely examined for possible data trends.  This was not considered because the low standard deviation showed little signs of anomaly, but it might be worth a second look at the data to see if this or other insights are present. It might therefore be possible to develop a predictive model on how long a user needs to train to achieve expert-level performance.
 
-One possible area of exploration is to measure error not by incorrect 
-keystrokes but by the distance between the detected key and the expected key. \cite{Jain11} 
-This would allow less of a penalty for keystrokes that were \textquotedblleft fat
-finger\textquotedblright{} entries of neighboring keys.
+One possible area of exploration is to measure error not by incorrect keystrokes but by the distance between the detected key and the expected key. \cite{Jain11} This would allow less of a penalty for keystrokes that were \textquotedblleft fat finger\textquotedblright{} entries of neighboring keys.
 
 Metropolis is surprisingly easy to use on a touchscreen mounted in front of the user compared to QWERTY. Ultimately its design is better optimized for one-handed use, let alone for one or two fingers.  In similar situations where a user is not able to use both hands comfortably, a full QWERTY layout can be rather straining on wrists and arms over time, so this keyboard merits further exploration in those contexts.
 
 Though hints were not found to be useful for touch-typing QWERTY users, the hints were shown to improve speed and accuracy for users learning a new keyboard layout, so it is a useful consideration for training users on any new and novel keyboard design to adopt similar features as it can lower user frustration while training.
 
 If repeating this experiment with a similar apparatus, it is highly recommended to start with a pilot experiment to smoke-test the apparatus for bugs or difficulties in the instructions.  For example, subjects who dropped out of the experiment did not observe the instructions asked for them to be using a tablet-sized touch device, and would start the experiment only to complain that the keyboard was not working on their iPhones.  Better device detection could also have intercepted the users on the first screen to save them some time, or even better convert their drop to a completion if they happen to have a tablet device they could use instead.  This was not factored in orginally, but in retrospect could have converted a handful of dropout subjects.
+
+\appendix
+\section{Additional Figures}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.95\columnwidth]{subject-age.png}
+  \caption{Subjects' ages range from 20 to 80}
+  \label{fig:age}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.95\columnwidth]{subject-location.png}
+  \caption{Subjects' location}
+  \label{fig:location}
+\end{figure}
 
 \bibliographystyle{abbrv}
 \bibliography{badvision}
